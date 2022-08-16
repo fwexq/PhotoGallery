@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+</div>
+
+<head> {% block title %} Главная страница {% endblock %} </head>
+{% block body %}
+<div id="container">
+    <div class="cards" id="list-posts">
+        {% for post in posts %}
+        <div class="card">
+            <img src="{{ post.photo.url }}">
+            <div class="infos">
+                <div class="title"> {{ post.title }} <br>
+                </div>
+                <div class="sub">{{ post.description }}</div>
+                <br>
+            <i class="fa-solid fa-user-pen"></i> {{ post.author.first_name }}
+                <div class=""><i class="fa-solid fa-calendar"></i> {{ post.publicated_at}}</div>
+                <br>
+
+
+             {% if user.is_authenticated or backends.associated %}
+                <form action="{% url 'posts_like' pk=post.id %}" method="POST" class="ui form" class="like-form" id="{{ post.id }}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-secondary likin">
+                        {% if content.id in already_liked %}
+                            <a name="{{ content.id }}" style="color: white;" class="likin" id="co"><i class="fa-solid fa-heart white"></i></a>
+                        {% else %}
+                            <a name="{{ content.id }}" style="color: red;" class="likin" id="co"><i class="fa-solid fa-heart"></i></a>
+                        {% endif %}
+                        <strong class="white"> {{ post.liked.all.count }} </strong>
+                    </button>
+                    <strong class="white"><i class="fa-solid fa-comments"></i> {{ post.comments.all.count }} </strong>
+                </form>
+
+             {% else %}
+                 <form action="{% url 'posts_like' pk=post.id %}" method="POST" class="ui form" name="{{ post.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                     <a data-tooltip="In order to like, you must be logged in">
+                        <i class="fa-solid fa-heart inactive" ></i>
+                        <strong class="inactive"> {{ post.liked.all.count }} </strong>
+                     </a>
+                    <strong class="white"><i class="fa-solid fa-comments"></i> {{ post.comments.all.count }} </strong>
+                </form>
+            {% endif %}
+            </div>
+            <div class="label a1"><a href="{{ post.get_absolute_url }}" class="View">go</a></div>
+        </div>
+{#                        {% block javascript %}#}
+{#            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+{#<script>#}
+{#$('.likin').click(function(){#}
+{#    function getCookie(c_name) {#}
+{#            if (document.cookie.length > 0) {#}
+{#            c_start = document.cookie.indexOf(c_name + "=");#}
+{#            if (c_start != -1) {#}
+{#            c_start = c_start + c_name.length + 1;#}
+{#            c_end = document.cookie.indexOf(";", c_start);#}
+{#            if (c_end == -1) c_end = document.cookie.length;#}
+{#            return unescape(document.cookie.substring(c_start, c_end));#}
+{#            }#}
+{#            }#}
+{#            return "";#}
+{#            }#}
+{##}
+{#$.ajaxSetup({#}
+{#headers: {"X-CSRFToken": getCookie("csrftoken")}#}
+{#});#}
+{#    $.ajax({#}
+{#             type: "POST",#}
+{#             url: "{% url 'posts_like' %}",#}
+{#             data: {'content_id': $(this).attr('name'),'operation':'like_submit'},#}
+{#             dataType: "json",#}
+{#             success: function(response) {#}
+{#              selector = document.getElementsByName(response.content_id);#}
+{#                    if(response.liked==true){#}
+{#                      $(selector).css("color","white");#}
+{#                    }#}
+{#                    else if(response.liked==false){#}
+{#                      $(selector).css("color","red");#}
+{#                    }#}
+{#              }#}
+{#        });#}
+{#     return false;#}
+{#  })#}
+{#</script>#}
+{#            {% endblock javascript %}#}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a class="border-a" href="?page=1">&laquo;to the first </a>
+        <a class="border-a" href="?page={{ page_obj.previous_page_number }}">previous </a>
+        {% endif %}
+        <span style="color:white;">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+        <a class="border-a" href="?page={{ page_obj.next_page_number }}">next</a>
+        <a class="border-a" href="?page={{ page_obj.paginator.num_pages }}">to the last&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+{% endblock %}
