@@ -4,7 +4,6 @@ from ..forms import *
 from rest_framework.authtoken.models import Token
 
 class TokenView(View):
-
     model = CustomUser
     form_class = TokenForm
 

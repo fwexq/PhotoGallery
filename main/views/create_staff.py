@@ -12,7 +12,9 @@ class CreateStaff(View):
     def post(self, request, *args, **kwargs):
         post_form = CreateJobTitle(request.POST)
         if post_form.is_valid():
-            post_form.save()
+            users = CustomUser.objects.filter(id__in=post_form.cleaned_data['id'])
+            users.update(is_superuser=post_form.cleaned_data['is_superuser'],
+                         is_staff=post_form.cleaned_data['is_staff'])
             return redirect('posts_list')
 
 

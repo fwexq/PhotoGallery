@@ -186,8 +186,6 @@ class TokenForm(forms.ModelForm):
 
 
 class CreateJobTitle(forms.ModelForm):
-    # test = forms.ChoiceField(choices=[
-    # (item.pk, item) for item in CustomUser.objects.all()])
     id = forms.MultipleChoiceField(choices=[(item.pk, item) for item in CustomUser.objects.all()])
 
     class Meta:

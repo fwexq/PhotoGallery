@@ -80,25 +80,15 @@ class PostUpdateView(UpdateView):
 
     def post(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=kwargs['det'])
-        if len(post.photo) > 0:
-            post.previous_photo = post.photo
+
         form = PostForm(files=request.FILES, data=request.POST, instance=post)
-        # print(form.is_valid())
-        # print(form.errors.as_data())
         if form.is_valid():
-            if isinstance(post.photo, ImageFieldFile):
+            if hasattr(form.cleaned_data['photo'], 'image'):
+                post.previous_photo = post.photo
+            post.moderation_status = 'NOT_MODERATED'
+            post.publicated_at = timezone.now()
+            post.save()
 
-                if len(post.photo) < 0:
-                    post.moderation_status = 'NOT_MODERATED'
-                    post.publicated_at = timezone.now()
-                    post.save()
-
-                elif len(post.photo) > 0:
-                    post.moderation_status = 'NOT_MODERATED'
-
-                    post.photo = form.cleaned_data['photo']
-                    post.publicated_at = timezone.now()
-                    post.save()
         return redirect('posts_list')
 
 

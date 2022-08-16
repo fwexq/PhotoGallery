@@ -1,5 +1,4 @@
 from django.urls import path
-from .views_mod import *
 from .views.authorization import AuthorizationView
 from .views.comments import CommentsView
 from .views.create_staff import CreateStaff
