@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_celery_beat',
 ]
 
 # https://stackoverflow.com/questions/16068518/django-site-matching-query-does-not-exist
