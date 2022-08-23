@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     # 'django_celery_beat',
+    'service_objects',
 ]
 
 # https://stackoverflow.com/questions/16068518/django-site-matching-query-does-not-exist
@@ -187,30 +188,30 @@ SOCIAL_AUTH_PIPELINE = (
     'main.pipelines.save_user_profile',
 )
 
-LOGGING = {
-        'version': 1,
-        "disable_existing_loggers": False,
-        "formatters": {
-            'standard': {
-                'format': '[%(asctime)s] %(levelname)s: %(message)s'
-            },
-        },
-        'handlers': {
-            'console': {
-                "class": "logging.StreamHandler",
-                "formatter": "standard",
-                "level": "DEBUG",
-            },
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console'],
-                'level': 'INFO',
-            },
-            'django.db.backends': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-                'propagate': False,
-            },
-        }
-    }
+# LOGGING = {
+#         'version': 1,
+#         "disable_existing_loggers": False,
+#         "formatters": {
+#             'standard': {
+#                 'format': '[%(asctime)s] %(levelname)s: %(message)s'
+#             },
+#         },
+#         'handlers': {
+#             'console': {
+#                 "class": "logging.StreamHandler",
+#                 "formatter": "standard",
+#                 "level": "DEBUG",
+#             },
+#         },
+#         'loggers': {
+#             'django': {
+#                 'handlers': ['console'],
+#                 'level': 'INFO',
+#             },
+#             'django.db.backends': {
+#                 'level': 'DEBUG',
+#                 'handlers': ['console'],
+#                 'propagate': False,
+#             },
+#         }
+#     }

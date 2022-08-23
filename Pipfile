@@ -17,6 +17,7 @@ generics = "*"
 pipfile = "*"
 django-celery-beat = "*"
 redis = "*"
+django-service-objects = "*"
 
 [dev-packages]
 flake8 = "*"

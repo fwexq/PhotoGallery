@@ -60,9 +60,12 @@ class FormValidation:
 
 
 class RegisterUserForm(UserCreationForm):
-    first_name = forms.CharField(label='', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name'}))
-    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@mail.ru'}))
-    password1 = forms.CharField(label='', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    first_name = forms.CharField(label='',
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name'}))
+    email = forms.EmailField(label='',
+                             widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@mail.ru'}))
+    password1 = forms.CharField(label='',
+                                widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     password2 = None
 
     class Meta:
@@ -83,8 +86,10 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     # username = None
     username = UsernameField(widget=forms.TextInput(attrs={"autofocus": True}), required=False)
-    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@mail.ru'}))
-    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':'Password'}))
+    email = forms.EmailField(label='',
+                             widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@mail.ru'}))
+    password = forms.CharField(label='',
+                               widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -103,10 +108,9 @@ class LoginUserForm(AuthenticationForm):
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
-        fields = ('text', )
+        fields = ('text',)
 
         widgets = {
             'text': forms.TextInput(attrs={
@@ -117,7 +121,6 @@ class CommentForm(forms.ModelForm):
 
 
 class CreatePostForm(ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(CreatePostForm, self).__init__(*args, **kwargs)
         self.fields['title'].label = ''
@@ -129,10 +132,11 @@ class CreatePostForm(ModelForm):
         fields = ('title', 'description', 'photo')
 
         widgets = {
-            "title": TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the title', 'style':'width:27%',
-                                      'style':'border-radius:10px',  'style':'width: auto'}),
-            "description": Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter the description', 'style': 'height:8%',
-                                           'style':'border-radius: 10px', 'style':'width: auto'}),
+            "title": TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the title', 'style': 'width:27%',
+                                      'style': 'border-radius:10px', 'style': 'width: auto'}),
+            "description": Textarea(
+                attrs={'class': 'form-control', 'placeholder': 'Enter the description', 'style': 'height:8%',
+                       'style': 'border-radius: 10px', 'style': 'width: auto'}),
 
         }
 
@@ -150,7 +154,8 @@ class PostForm(forms.ModelForm):
 
         widgets = {
             "title": TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the title', 'style': 'width:27%'}),
-            "description": Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter the description', 'style': 'height:8%'}),
+            "description": Textarea(
+                attrs={'class': 'form-control', 'placeholder': 'Enter the description', 'style': 'height:8%'}),
 
         }
 
@@ -191,6 +196,3 @@ class CreateJobTitle(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ('id', 'is_superuser', 'is_staff')
-
-
-

@@ -1,6 +1,5 @@
 from django.shortcuts import redirect
 from django.views.generic import ListView
-from ..forms import *
 from ..models.post.models import Post
 
 

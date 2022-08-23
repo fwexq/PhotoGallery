@@ -120,7 +120,7 @@
 
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" data-popper-placement="top-start">
                 <li><a class="dropdown-item" href="{% url 'profile' user.pk %}">Personal Area <i class="fa-solid fa-circle-user"></i></a></li>
-                {% if user.is_superuser %}
+                {% if user.is_superuser or user.is_staff %}
                 <li><a class="dropdown-item" href="{% url 'post_list_moderation' %}">Posts for approval</a></li>
                     <li><a class="dropdown-item" href="{% url 'create_staff' %}">Create staff</a>
                     {% endif %}
