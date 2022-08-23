@@ -22,4 +22,4 @@ class LikesService(Service):
             post.liked.add(self.cleaned_data['user'])
             is_liked = True
         post.save()
-        return JsonResponse({'is_liked': is_liked})
+        return is_liked
