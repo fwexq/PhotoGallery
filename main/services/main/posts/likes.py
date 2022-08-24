@@ -1,5 +1,4 @@
 from django import forms
-from django.http import JsonResponse
 from service_objects.fields import ModelField
 from service_objects.services import Service
 from main.models import CustomUser, Post, Like

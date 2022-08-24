@@ -59,28 +59,16 @@ class CreatePostView(CreateView, View):
     template_name = 'main/posts/create.html'
     # success_url = 'main/posts/create.html'
     # service_class = CreatePostService
+
     def post(self, request, *args, **kwargs):
-        post = CreatePostService.execute(request.POST | {'user': request.user} | request.FILES)
-        post_form = CreatePostForm(data=request.POST, files=request.FILES, instance=post)
-        post_form.save()
+        post = CreatePostService.execute(request.POST.dict() | {'user': request.user}, request.FILES)
         messages.success(
             request,
             "The post was successfully submitted for moderation"
         )
-        return render(request, 'main/posts/create.html', {'post_form': post_form})
-
-
-    # def post(self, request, *args, **kwargs):
-    #     post_form = CreatePostForm(request.POST, request.FILES)
-    #     if post_form.is_valid():
-    #         instance = post_form.save(commit=False)
-    #         instance.author = request.user
-    #         instance.save()
-    #         messages.success(
-    #             request,
-    #             "Пост был успешно отправлен на модерацию"
-    #         )
-    #     return render(request, 'main/posts/create.html', {'post_form': post_form})
+        return render(request,
+                      'main/posts/create.html',
+                      {'post_form': CreatePostForm(instance=post)})
 
     def get(self, request, *args, **kwargs):
         post_form = CreatePostForm()

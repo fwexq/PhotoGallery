@@ -6,7 +6,7 @@ from service_objects.fields import ModelField
 class CreatePostService(Service):
     title = forms.CharField(required=True, max_length=40)
     description = forms.CharField(required=True, max_length=80)
-    photo = forms.Field(required=True)
+    photo = forms.ImageField(required=True)
     user = ModelField(CustomUser)
 
     def process(self):
@@ -16,5 +16,5 @@ class CreatePostService(Service):
             photo=self.cleaned_data['photo'],
             author=self.cleaned_data['user']
         )
-
+        self.post.save()
         return self.post
