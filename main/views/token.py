@@ -21,5 +21,5 @@ class TokenView(View):
         return render(request, 'main/accounts/profile.html', {'token': token})
 
     def get(self, request):
-        form = TokenForm()
+        # form = TokenForm()
         return render(request, 'main/accounts/profile.html', {'form': form})
