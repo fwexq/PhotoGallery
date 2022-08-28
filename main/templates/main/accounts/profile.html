@@ -44,7 +44,7 @@
                          {% if user.id == request.user.id %}
                                <form action="{% url 'token' %}" method="POST">
                             {% csrf_token %}
-                                  <p class="token">{{ user.api_key }}</p>
+                                  <p class="token">{{ token.key}}</p>
                                   <button type="submit" class="btn btn-light token-key-bt">Generate API key</button>
                               </form>
                              {% endif %}
