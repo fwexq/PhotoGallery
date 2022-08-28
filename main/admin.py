@@ -5,13 +5,14 @@ from main.models.user.models import CustomUser
 from main.models.comment.models import Comment
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'email', 'last_name', 'password', 'avatar', 'created_at', 'updated_at', 'ip', 'api_key', 'total_visits', 'day', 'day_visits', 'count')
+    list_display = ('first_name', 'email', 'last_name', 'password', 'avatar', 'created_at', 'updated_at', 'ip', 'total_visits', 'day', 'day_visits', 'count')
 admin.site.register(CustomUser, CustomUserAdmin)
 
 
 class PostAdmin(admin.ModelAdmin):
     fields = ['liked']
     list_display = ('title', 'description', 'created_at', 'updated_at', 'publicated_at', 'moderation_status', 'publish', 'photo')
+
 
     # def has_add_permission(self, request):
     #     return False
