@@ -6,7 +6,7 @@ from main.models import CustomUser, Post, Like
 
 class LikesService(Service):
     user = ModelField(CustomUser)
-    pk = forms.CharField(required=True)
+    pk = forms.IntegerField()
 
     def process(self):
         self.like = Like(

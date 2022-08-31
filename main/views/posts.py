@@ -66,9 +66,7 @@ class CreatePostView(CreateView, View):
             request,
             "The post was successfully submitted for moderation"
         )
-        return render(request,
-                      'main/posts/create.html',
-                      {'post_form': CreatePostForm(instance=post)})
+        return redirect('posts_list')
 
     def get(self, request, *args, **kwargs):
         post_form = CreatePostForm()
