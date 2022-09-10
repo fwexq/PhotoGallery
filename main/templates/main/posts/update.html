@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Indie+Flower&display=swap" rel="stylesheet">
 <head>
-    <title>Создание поста</title>
+    <title>Редактирование поста</title>
 </head>
 {% block body %}
     <div class="album py-5 bg-light ">
     <button type="button" class="btn btn-light" onclick="history.back(-2); return false;">Back</button>
         <br><br>
-    <form method="post" action="{% url 'posts_update' det=post.id%}" enctype="multipart/form-data">
+    <form method="post" action="{% url 'posts_update' det=post.id  %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form  }}
 
     <button type="submit" class="btn btn-light-create-form">Сохранить</button>
 </form>

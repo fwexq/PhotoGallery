@@ -9,6 +9,7 @@ from ..forms import *
 from main.utils import DataMixin
 from ..models.post.models import Post
 from ..services.main.posts.create import CreatePostService
+from ..services.main.posts.update import PostUpdateService
 
 
 class PostListView(DataMixin, ListView):
@@ -57,15 +58,9 @@ class DetailPostView(DataMixin, View):
 class CreatePostView(CreateView, View):
     form_class = CreatePostForm
     template_name = 'main/posts/create.html'
-    # success_url = 'main/posts/create.html'
-    # service_class = CreatePostService
 
     def post(self, request, *args, **kwargs):
-        post = CreatePostService.execute(request.POST.dict() | {'user': request.user}, request.FILES)
-        messages.success(
-            request,
-            "The post was successfully submitted for moderation"
-        )
+        CreatePostService.execute(request.POST.dict() | {'user': request.user}, request.FILES)
         return redirect('posts_list')
 
     def get(self, request, *args, **kwargs):
@@ -73,24 +68,30 @@ class CreatePostView(CreateView, View):
         return render(request, 'main/posts/create.html', {'post_form': post_form})
 
 class PostUpdateView(UpdateView):
-    model = Post
     template_name = 'main/posts/update.html'
     form_class = PostForm
     context_object_name = 'post'
-    pk_url_kwarg = 'det'
+    # pk_url_kwarg = 'det'
 
     def post(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk=kwargs['det'])
+        #
+        PostUpdateService.execute(kwargs | request.POST.dict() | {'user': request.user}, request.FILES)
 
-        form = PostForm(files=request.FILES, data=request.POST, instance=post)
-        if form.is_valid():
-            if hasattr(form.cleaned_data['photo'], 'image'):
-                post.previous_photo = post.photo
-            post.moderation_status = 'NOT_MODERATED'
-            post.publicated_at = timezone.now()
-            post.save()
+        # form = PostForm(files=request.FILES, data=request.POST, instance=post)
+        # if form.is_valid():
+        #     if hasattr(form.cleaned_data['photo'], 'image'):
+        #         post.previous_photo = post.photo
+        #     post.moderation_status = 'NOT_MODERATED'
+        #     post.publicated_at = timezone.now()
+        #     post.save()
 
         return redirect('posts_list')
+
+    def get(self, request, *args, **kwargs):
+        post = get_object_or_404(Post, pk=kwargs['det'])
+        form = PostForm()
+        # return redirect('posts_update', det=kwargs['det'])
+        return render(request, 'main/posts/update.html', {'form': form, 'post': post})
 
 
 class PostDeleteView(DeleteView):
