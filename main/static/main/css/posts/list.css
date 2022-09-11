@@ -1,6 +1,6 @@
 :root {
   --background-header: #000000;
-  --title: #ffffff;
+  --title: #fedca3;
   --icons: #ffffff;
 }
 * {
@@ -537,11 +537,11 @@ img-for-header {
     color: white;
 }
 
-.head {
-
-
+.dropdown-menu-dark .dropdown-item:focus, .dropdown-menu-dark .dropdown-item:hover {
+    color: #fff;
+    border-radius: 30px;
+    background-color: rgb(254 220 163 / 93%);
 }
-
 
 
 

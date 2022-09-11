@@ -17,34 +17,34 @@
     color: #212529;
     text-decoration: none;
     background-color: #fff;
-    border: 2px solid #b28779;
+    border: 2px solid #000000;
 }
 
 a {
     text-decoration: None;
-    color: #53413a;
-    font-weight: bold;
+    color: #525252;
+    font-weight: bolder;
     font-style: italic;
 }
 
+
 body {
-    background: #e7b2a2;
+    background: #000000;
+    font-family: 'Cormorant SC', sans-serif;
 }
 
 *before, *after {
     box-sizing: border-box;
 }
 li:hover {
-    background: #b28779;
-    opacity: 0.6;
+    background: #fedca3;
     border: none;
-
 }
 
 p {
     font-size: 24px;
     margin-left: 40px;
-    color: #53413a;
+    color: #fedca3;
 }
 
 .created-at-right {
