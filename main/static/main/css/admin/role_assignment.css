@@ -1,0 +1,65 @@
+body{
+    background: black;
+    font-family: 'Cormorant SC', sans-serif;
+}
+
+label {
+    color: white;
+    display: block;
+    letter-spacing: 1px;
+    margin-left: 4px;
+}
+span {
+    color: #ffffff70;
+    display: block;
+    letter-spacing: 1px;
+    margin-left: 4px;
+}
+
+select{
+    color: black;
+    font-family: 'Cormorant SC';
+    font-size: 15px;
+    overflow: overlay;
+    border-radius: 15px;
+}
+
+h1 {
+    color: #fedca3;
+    font-size: 25px;
+}
+
+button {
+    color: #fedca3;
+    background: black;
+    border: 1px solid #fedca3;
+    border-radius: 10px;
+    padding: 6px;
+    margin-top: 10px;
+}
+button:hover {
+    color: #fedca3;
+    background: #fedca361;
+    border: 1px solid #fedca3;
+    border-radius: 10px;
+    padding: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 1.4s;
+}
+
+.btn-light {
+    color: #b5b5b5;
+    background-color: #000000;
+    border-color: #999999;
+    border-radius: 10px;
+
+}
+
+.btn-light:hover {
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: #999999;
+    border-radius: 10px;
+    transition: 1.4s;
+}

@@ -181,9 +181,9 @@ class UserUpdateForm(forms.ModelForm):
 
 
 
-class CreateJobTitle(forms.ModelForm):
-    id = forms.MultipleChoiceField(choices=[(item.pk, item) for item in CustomUser.objects.all()])
+class RoleAssignment(forms.ModelForm):
+    user = forms.MultipleChoiceField(choices=[(item.pk, item) for item in CustomUser.objects.all()])
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'is_superuser', 'is_staff')
+        fields = ('user', 'is_superuser', 'is_staff')

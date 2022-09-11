@@ -120,8 +120,8 @@
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" data-popper-placement="top-start">
                 <li><a class="dropdown-item" href="{% url 'profile' user.pk %}">Personal Area <i class="fa-solid fa-circle-user"></i></a></li>
                 {% if user.is_superuser or user.is_staff %}
-                <li><a class="dropdown-item" href="{% url 'post_list_moderation' %}">Posts for approval</a></li>
-                    <li><a class="dropdown-item" href="{% url 'create_staff' %}">Create staff</a>
+                <li><a class="dropdown-item" href="{% url 'post_list_moderation' %}">Posts for approval <i class="fa-solid fa-clipboard-check"></i></a></li>
+                    <li><a class="dropdown-item" href="{% url 'role_assignment' %}">Role Assignment <i class="fa-solid fa-people-arrows"></i></a>
                     {% endif %}
                 <li><a class="dropdown-item" href="{% url 'posts_create' %}">Suggest post <i class="fa-solid fa-plus"></i></a></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Exit <i class="fas fa-sign-out-alt"></i> </a>

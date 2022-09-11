@@ -1,7 +1,7 @@
 from django.urls import path
 from .views.authorization import AuthorizationView
 from .views.comments import CommentsView
-from .views.create_staff import CreateStaff
+from .views.role_assignment import RoleAssignmentView
 from .views.for_approval_posts import PostModerationListView
 from .views.likes import LikesView
 from .views.logouster import ProfileLogoutView
@@ -38,7 +38,7 @@ urlpatterns = [
     path('search/', Search.as_view(), name='search'),
     path('logout/', ProfileLogoutView.as_view(), name='logout'),
 
-    path('create_staff/', CreateStaff.as_view(), name='create_staff'),
+    path('role_assignment/', RoleAssignmentView.as_view(), name='role_assignment'),
 
 ]
 

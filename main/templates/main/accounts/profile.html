@@ -35,9 +35,19 @@
                 <div class="col">
             <div class="card_prof strokeblock strokeblock2">
                 <div class="card_prof-body">
+                {% if user.first_name %}
+                    <p>{{ user.first_name }}</p>
+                {% else %}
+                    <p>Name not set</p>
+                {% endif %}
 
-                <p>{{ user.first_name }}</p>
-                <p>{{ user.last_name }}</p>
+                {% if user.last_name %}
+                    <p>{{ user.last_name }}</p>
+                {% else %}
+                    <p>Surname not set</p>
+                {% endif %}
+
+
                 <a class="additional-info">Site visited today {{ user.count }} times </a><br>
                 <a class="additional-info">The last entry was {{ user.day }}</a>
 

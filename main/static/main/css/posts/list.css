@@ -54,7 +54,7 @@
 .card .infos {
   color: white;
   margin-bottom: 20px;
-  margin-left: 15px;
+  margin-left: 35px;
   opacity: 0;
   transition: .5s;
   z-index: 1;
@@ -146,6 +146,7 @@ a:focus:after {
 
 .dropdown-menu-dark .dropdown-item {
     color: #ffffff;
+    border-radius: 15px;
 }
 
 
@@ -541,6 +542,7 @@ img-for-header {
     color: #fff;
     border-radius: 30px;
     background-color: rgb(254 220 163 / 93%);
+    transition: 3s;
 }
 
 

@@ -7,7 +7,7 @@
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
     border-radius: 15px;
-
+    transition: 2s;
 }
 
 .list-group-item {
@@ -38,7 +38,8 @@ body {
 }
 li:hover {
     background: #fedca3;
-    border: none;
+    border: 15px solid black;
+    transition: 2s;
 }
 
 p {

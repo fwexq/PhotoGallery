@@ -3,7 +3,7 @@ from service_objects.services import Service
 from main.models import CustomUser
 
 
-class CreateStaffService(Service):
+class RoleAssignmentService(Service):
     id = forms.IntegerField()
     is_staff = forms.CharField()
 

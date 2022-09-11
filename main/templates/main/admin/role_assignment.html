@@ -1,14 +1,16 @@
 {% load static %}
-<link rel="stylesheet" href="{% static "main/css/job_title/title.css" %}">
+<link rel="stylesheet" href="{% static "main/css/admin/role_assignment.css" %}">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Indie+Flower&display=swap" rel="stylesheet">
+
 <head>
-    <title>Посты без модерации</title>
+    <title>Role Assignment</title>
 </head>
-
-
-    <form action="{% url 'create_staff' %}" method="post">
+<button type="button" class="btn btn-light" onclick="history.back(-2); return false;">Back</button>
+<h1>Here you can appoint or remove from office</h1>
+    <form action="{% url 'role_assignment' %}" method="post">
     {% csrf_token %}
     {{ form }}
         <button type="submit" class="btn-n btn-light-create-form">Appoint</button>
