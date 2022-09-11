@@ -15,14 +15,14 @@
 {% block body %}
 
 <div class="album py-5 bg-light">
-<button type="button" class="btn btn-light"><a href="/">Back</a></button>
+<button type="button" class="btn btn-light left"><a href="/">Back</a></button>
 
     {% if request.user != user.is_superuser and not user.is_staff %}
-        <h1 class="yellow">USER</h1>
+        <h1 class="white">USER</h1>
     {% elif request.user == user.is_staff and not user.is_superuser %}
-        <h1 class="green">MODERATOR</h1>
+        <h1 class="white">MODERATOR</h1>
     {% else %}
-        <h1 class="red">ADMINISTRATOR</h1>
+        <h1 class="white">ADMINISTRATOR</h1>
     {% endif %}
 
 
@@ -38,14 +38,19 @@
 
                 <p>{{ user.first_name }}</p>
                 <p>{{ user.last_name }}</p>
-                <p>Site visited today {{ user.count }} times </p>
-                <p>The last entry was {{ user.day }}</p>
+                <a class="additional-info">Site visited today {{ user.count }} times </a><br>
+                <a class="additional-info">The last entry was {{ user.day }}</a>
 
                          {% if user.id == request.user.id %}
                                <form action="{% url 'token' %}" method="POST">
                             {% csrf_token %}
+                                   {% if token.key %}
                                   <p class="token">{{ token.key}}</p>
+                                       <button type="submit" class="btn btn-light token-key-bt">Generate API key</button>
+                               {% else %}
+                                       <br>
                                   <button type="submit" class="btn btn-light token-key-bt">Generate API key</button>
+                               {% endif %}
                               </form>
                              {% endif %}
 
@@ -56,9 +61,9 @@
                              {{ user.avatar.url }}{% else %}{% static 'main/image/users/default_avatar.jpg' %} {% endif %}'>
 
 {% if user.id == request.user.id %}
-                <p><a href="{% url 'account_posts_list' status='rejected'%}" class="status">Rejected posts <i class="fa-solid fa-xmark"></i></a></p>
-                <p><a href="{% url 'account_posts_list' status='published'%}"class="status">Published posts <i class="fa-solid fa-check"></i></a></p>
-                <p><a href="{% url 'account_posts_list' status='moderated' %}"class="status">Moderated posts <i class="fa-solid fa-list-check"></i></a></p>
+                <h6><a href="{% url 'account_posts_list' status='rejected'%}" class="status">Rejected posts <i class="fa-solid fa-xmark"></i></a></h6>
+                <h6><a href="{% url 'account_posts_list' status='published'%}"class="status">Published posts <i class="fa-solid fa-check"></i></a></h6>
+                <h6><a href="{% url 'account_posts_list' status='moderated' %}"class="status">Moderated posts <i class="fa-solid fa-list-check"></i></a></h6>
 {% endif %}
                 </div>
             </div>
@@ -70,7 +75,6 @@
                 </div>
                 <br><br><br>
             </div>
-
 
       </div>
     </div>

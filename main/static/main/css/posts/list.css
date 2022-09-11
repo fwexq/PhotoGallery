@@ -1,6 +1,6 @@
 :root {
-  --background-header: #070707;
-  --title: #ffd700;
+  --background-header: #000000;
+  --title: #ffffff;
   --icons: #ffffff;
 }
 * {
@@ -353,7 +353,7 @@ a:hover {
 }
 
 .navbar-dark .navbar-brand {
-    color: #ebeaea;
+    color: #e2e2e2;
     text-align: center;
 }
 

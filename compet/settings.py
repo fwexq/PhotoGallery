@@ -215,3 +215,4 @@ SOCIAL_AUTH_PIPELINE = (
 #             },
 #         }
 #     }
+

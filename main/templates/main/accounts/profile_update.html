@@ -12,15 +12,21 @@
     <title>Создание поста</title>
 </head>
 {% block body %}
+
     <div class="album py-5 bg-light ">
     <button type="button" class="btn btn-light" onclick="history.back(-2); return false;">Back</button>
         <br><br>
-
 <form action="{% url 'profile_update' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <a>ffff</a>
+    <br>
+    <img width="140" height="140" src='{% if user.avatar %}
+                             {{ user.avatar.url }}{% else %}{% static 'main/image/users/default_avatar.jpg' %} {% endif %}'>
+
         <button type="submit" class="btn btn-light-create-form">Сохранить изменения</button>
 </form>
 
      </div>
+
 {% endblock %}

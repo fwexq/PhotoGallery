@@ -172,9 +172,9 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'avatar']
 
         widgets = {
-            "first_name": TextInput(attrs={'class': 'form-control', 'placeholder': 'Иван', 'style': 'width:27%'}),
+            "first_name": TextInput(attrs={'class': 'form-control', 'placeholder': 'Иван', 'style': 'width:15%'}),
             "last_name": TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Иванов', 'style': 'width:27%'}),
+                attrs={'class': 'form-control', 'placeholder': 'Иванов', 'style': 'width:15%'}),
 
         }
 
