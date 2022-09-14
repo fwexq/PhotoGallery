@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Indie+Flower&display=swap" rel="stylesheet">
 <head>
-    <title>Редактирование поста</title>
+    <title>Post editing</title>
 </head>
 {% block body %}
     <div class="album py-5 bg-light ">
@@ -18,7 +18,7 @@
             {% csrf_token %}
             {{ form  }}
 
-    <button type="submit" class="btn btn-light-create-form">Сохранить</button>
+    <button type="submit" class="btn btn-light-create-form">Saves changes</button>
 </form>
     </div>
 {% endblock %}

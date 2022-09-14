@@ -1,7 +1,7 @@
 .btn-light-create-form {
-    color: #fff;
-    background-color: #aa8073;
-    border-color: #aa8073;
+    color: #fedca3;
+    background-color: #000000;
+    border-color: #fedca3;
     padding-left: 10px;
     margin-bottom: -100px;
     margin-left: 60px;
@@ -16,10 +16,10 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #e7c1b5;
+    color: #000000;
     background-color: #fff;
     background-clip: padding-box;
-    border: 2px solid #be988d;
+    border: 2px solid #000000;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -33,6 +33,7 @@ input, optgroup, select, textarea {
     margin-left: 21px;
     font-size: inherit;
     line-height: inherit;
+    color: #fedca3;
 }
 p {
     margin-top: 0;
@@ -50,27 +51,25 @@ body {
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: 'Cormorant SC', sans-serif;
-    background-color: #f7e4df!important;
+    background-color: #000000!important;
 }
 
 .bg-light {
-    background-color: #e7b2a2!important;
+    background-color: #000000!important;
     border-radius: 20px;
-    margin-top: 20px;
     overflow: hidden;
     width: 40%;
-    margin-left: 150px;
-    margin-right: 150px;
-    -webkit-box-shadow: 16px 15px 0px 0px rgb(231 178 162 / 22%);
     margin: 0 auto;
+    border: 1px solid white;
+    margin-top: 20px;
 }
 
 .btn-light {
-    color: #ddd5d5;
-    background-color: #e7b2a2;
-    border-color: #aa8073;
+    color: #fedca3;
+    background-color: #000000;
+    border-color: #fedca3;
     padding-left: 10px;
-    margin-left: 35px;
+    margin-left: 8px;
     margin-top: -35px;
     border-radius: 10px;
 }
@@ -80,17 +79,25 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #cc9c8f;
+    background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(100deg, #f32453, #ef7c39, #dbb51a, #db8e1a, #f32453);
-    border-radius: 8px;
-    border: 4px solid #cc9c8f;
+    /* background: linear-gradient(100deg, #000000, #ef7c39, #dbb51a, #db8e1a, #f32453); */
+    background: #fedca3;
+    border-radius: 10px;
+    border: 6px solid #000000;
 }
 
 @media (prefers-reduced-motion: no-preference) {
     :root{
         scroll-behavior: smooth;
     }
+}
+
+.btn-light:hover {
+    color: #fedca3;
+    background-color: #ffffff70;
+    border-color: #f9fafb;
+    transition: 1s;
 }

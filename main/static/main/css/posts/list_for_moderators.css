@@ -6,7 +6,7 @@
 .list-group-item:last-child {
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
-    border-radius: 15px;
+    /* border-radius: 15px; */
     transition: 2s;
 }
 
@@ -14,19 +14,24 @@
     position: relative;
     display: block;
     padding: 0.5rem 1rem;
-    color: #212529;
+    color: #afafaf;
     text-decoration: none;
-    background-color: #fff;
-    border: 2px solid #000000;
+    background-color: #000;
+    border: 2px solid #fedca378;
 }
 
 a {
     text-decoration: None;
-    color: #525252;
+    color: #fedca3;
     font-weight: bolder;
     font-style: italic;
 }
-
+a:hover {
+    text-decoration: None;
+    color: white;
+    font-weight: bolder;
+    font-style: italic;
+}
 
 body {
     background: #000000;
@@ -67,3 +72,22 @@ p {
     border: 4px solid #cc9c8f;
 }
 
+.btn-light {
+    color: #b5b5b5;
+    background-color: #000000;
+    border-color: #d6dca3;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.btn-light:hover {
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #fedca3;
+    border-color: #fedca3;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 7px;
+    transition: 1s;
+}

@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-image: url("../../image/background/posts_confirm_delete.png");
+    /* background-image: url("../../image/background/posts_confirm_delete.png"); */
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Cormorant SC', sans-serif;
@@ -11,6 +11,7 @@ body {
     background-color: #fff;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    background: black;
 }
 
 .container {

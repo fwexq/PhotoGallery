@@ -9,8 +9,9 @@
     <title>Posts without moderation</title>
 </head>
 
-{% block body %}F
+{% block body %}
 <p>Submitted photos for the competition</p>
+    <button type="button" class="btn btn-light" onclick="history.back(-2); return false;">Back</button>
 {% for post in posts %}
 <ul class="list-group" style="margin-top: 1vw;">
     <li class="list-group-item"><a href="{% url 'posts_detail' post.pk %}">{{ post.title }}</a>
@@ -21,3 +22,4 @@
 <p>Нет объявлении без модерации</p>
 {% endfor %}
 {% endblock %}
+
