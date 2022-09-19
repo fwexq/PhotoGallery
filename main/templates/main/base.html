@@ -99,7 +99,7 @@
 
                             error: function(response) {
                                 console.log('не сработало(')
-                                // предупредим об ошибке
+
 
                             }
                         });
@@ -110,13 +110,12 @@
             {% endblock javascript %}
 
             {% if request.user.is_authenticated %}
-
+                <script src="static/main/js/greeting.js"></script>
                 <div>
             <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ user.avatar.url }}" alt="" width="32" height="32" class="rounded-circle me-2 ">
                 <strong>{{user.first_name}}</strong>
             </a>
-
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" data-popper-placement="top-start">
                 <li><a class="dropdown-item" href="{% url 'profile' user.pk %}">Personal Area <i class="fa-solid fa-circle-user"></i></a></li>
                 {% if user.is_superuser or user.is_staff %}

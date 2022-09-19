@@ -36,23 +36,23 @@ class DetailPostView(DataMixin, View):
                        'comments': comments,
                        'comment_form': comment_form})
 
-    def comments(request):
-        if request.method == 'POST':
-            comment_form = CommentForm(data=request.POST)
-            post_id = request.POST.get('post_id')
-            post_obj = Post.objects.get(id=post_id)
-            comments = Comment.objects.all()
-            if comment_form.is_valid():
-                new_comment = comment_form.save(commit=False)
-                new_comment.post = post_obj
-                new_comment.save()
-        else:
-            comment_form = CommentForm()
-        return render(request,
-                      'main/posts/detail.html',
-                      {'post_obj': post_obj,
-                       'comments': comments,
-                       'comment_form': comment_form})
+    # def comments(request):
+    #     if request.method == 'POST':
+    #         comment_form = CommentForm(data=request.POST)
+    #         post_id = request.POST.get('post_id')
+    #         post_obj = Post.objects.get(id=post_id)
+    #         comments = Comment.objects.all()
+    #         if comment_form.is_valid():
+    #             new_comment = comment_form.save(commit=False)
+    #             new_comment.post = post_obj
+    #             new_comment.save()
+    #     else:
+    #         comment_form = CommentForm()
+    #     return render(request,
+    #                   'main/posts/detail.html',
+    #                   {'post_obj': post_obj,
+    #                    'comments': comments,
+    #                    'comment_form': comment_form})
 
 
 class CreatePostView(CreateView, View):

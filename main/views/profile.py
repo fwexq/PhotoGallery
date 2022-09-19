@@ -22,7 +22,7 @@ class ProfileUpdateView(UpdateView):
     template_name = 'main/accounts/profile_update.html'
 
     def post(self, request, *args, **kwargs):
-        ProfileUpdateService.execute(request.POST.dict() | {'user': request.user})
+        ProfileUpdateService.execute(request.POST.dict() | {'user': request.user}, request.FILES)
         return redirect('profile', pk=self.request.user.pk)
 
     def get_object(self):

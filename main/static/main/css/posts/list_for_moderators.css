@@ -6,7 +6,6 @@
 .list-group-item:last-child {
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
-    /* border-radius: 15px; */
     transition: 2s;
 }
 
@@ -14,23 +13,22 @@
     position: relative;
     display: block;
     padding: 0.5rem 1rem;
-    color: #afafaf;
     text-decoration: none;
     background-color: #000;
     border: 2px solid #fedca378;
 }
 
-a {
+
+li, a, ul {
     text-decoration: None;
     color: #fedca3;
     font-weight: bolder;
     font-style: italic;
+    cursor: pointer;
 }
-a:hover {
+li:hover, a:hover ul:hover {
     text-decoration: None;
-    color: white;
-    font-weight: bolder;
-    font-style: italic;
+    color: #272727;
 }
 
 body {

@@ -545,5 +545,7 @@ img-for-header {
     transition: 3s;
 }
 
-
-
+.greeting {
+    color: #fedca3;
+    margin-bottom: 4px;
+}

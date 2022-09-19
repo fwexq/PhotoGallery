@@ -15,7 +15,7 @@
 {% for post in posts %}
 <ul class="list-group" style="margin-top: 1vw;">
     <li class="list-group-item"><a href="{% url 'posts_detail' post.pk %}">{{ post.title }}</a>
-        <a class="created-at-right">{{ post.created_at }}</a></li>
+        <label class="created-at-right">{{ post.created_at }}</label></li>
 </ul>
 
 {% empty %}

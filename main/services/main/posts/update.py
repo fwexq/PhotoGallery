@@ -20,7 +20,7 @@ class PostUpdateService(Service):
             post.previous_photo = post.photo
             post.photo = self.cleaned_data['photo']
         post.moderation_status = 'NOT_MODERATED'
-        post.publicated_at = timezone.now()
+        # post.publicated_at = timezone.now()
         post.save()
-        return self
+
 
