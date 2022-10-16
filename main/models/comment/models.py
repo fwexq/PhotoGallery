@@ -9,8 +9,6 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Изменен')
 
-
-
     class Meta:
         db_table = 'comments'
         verbose_name = 'Комментарий'

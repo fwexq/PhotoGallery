@@ -70,4 +70,4 @@ class Post(IsDeletedMixin):
         verbose_name_plural = 'Посты'
 
     def get_absolute_url(self):
-        return reverse('posts_detail', kwargs={'det': self.pk})
+        return reverse('posts_detail', kwargs={'post_id': self.pk})

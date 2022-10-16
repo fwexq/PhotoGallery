@@ -60,7 +60,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
             <script>
-                $(document).ready(function() {
+                $(function() {
                     $('#search').submit(function() {
                         $.ajax({
                             data: {
@@ -68,7 +68,7 @@
                             },
                             type: $(this).attr('method'),
                             url: "{% url 'search' %}",
-                            // если успешно, то
+
 
                             success: function(response) {
                                 let block = document.getElementById('list-posts');
@@ -136,7 +136,7 @@
 
 
 
-            <li class="navbar-brand d-flex align-items-center navchik"> <a class="navchik helpp register hoverr line-effect1" href="{% url 'authorization' %}"> Authorization </a></li>
+            <li class="navbar-brand d-flex align-items-center navchik"> <a class="navchik helpp register hoverr line-effect1" href="{% url 'authorization' %}">Authorization</a></li>
 
                 {% endif %}
 
