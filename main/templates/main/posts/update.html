@@ -14,7 +14,7 @@
     <div class="album py-5 bg-light ">
     <button type="button" class="btn btn-light" onclick="history.back(-2); return false;">Back</button>
         <br><br>
-    <form method="post" action="{% url 'posts_update' det=post.id  %}" enctype="multipart/form-data">
+    <form method="post" action="{% url 'posts_update' post_id=post.id  %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form  }}
 

@@ -25,14 +25,14 @@ class PostListView(DataMixin, ListView):
 
 class DetailPostView(DataMixin, View):
     def get(self, request, *args, **kwargs):
-        post_obj = Post.objects.get(pk=kwargs['det'])
+        post_obj = Post.objects.get(pk=kwargs['post_id'])
         comments = post_obj.comments.all()
         user = request.user.id
         comment_form = CommentForm()
         return render(request,
                       'main/posts/detail.html',
                       {'post_obj': post_obj,
-                       'user': user,
+                       # 'user': user,
                        'comments': comments,
                        'comment_form': comment_form})
 
@@ -71,7 +71,7 @@ class PostUpdateView(UpdateView):
     template_name = 'main/posts/update.html'
     form_class = PostForm
     context_object_name = 'post'
-    # pk_url_kwarg = 'det'
+    # pk_url_kwarg = 'post_id'
 
     def post(self, request, *args, **kwargs):
         #
@@ -88,9 +88,9 @@ class PostUpdateView(UpdateView):
         return redirect('posts_list')
 
     def get(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk=kwargs['det'])
+        post = get_object_or_404(Post, pk=kwargs['post_id'])
         form = PostForm()
-        # return redirect('posts_update', det=kwargs['det'])
+        # return redirect('posts_update', post_id=kwargs['post_id'])
         return render(request, 'main/posts/update.html', {'form': form, 'post': post})
 
 

@@ -22,19 +22,19 @@ urlpatterns = [
 
     path('', PostListView.as_view(), name='posts_list'),
     path('create/', CreatePostView.as_view(), name='posts_create'),
-    path('update/<int:det>/', PostUpdateView.as_view(), name='posts_update'),
-    path('delete/<int:det>/', PostDeleteView.as_view(), name='posts_delete'),
-    path('detail/<int:det>/', DetailPostView.as_view(), name='posts_detail'),
+    path('update/<int:post_id>/', PostUpdateView.as_view(), name='posts_update'),
+    path('delete/<int:post_id>/', PostDeleteView.as_view(), name='posts_delete'),
+    path('detail/<int:post_id>', DetailPostView.as_view(), name='posts_detail'),
     path('post/moderation/', PostModerationListView.as_view(), name='post_list_moderation'),
 
 
     path('posts/<str:status>/', PostStatusView.as_view(), name='account_posts_list'),
 
 
-    path('detail/<int:det>/comments/', CommentsView.as_view(), name='comments'),
+    path('detail/<int:post_id>/comments', CommentsView.as_view(), name='comments'),
     path('likes/<int:pk>', LikesView.as_view(), name='posts_like'),
-    path('invalid/<int:det>/', PostInvalidView.as_view(), name='invalid'),
-    path('valid/<int:det>/', PostValidView.as_view(), name='valid'),
+    path('invalid/<int:post_id>/', PostInvalidView.as_view(), name='invalid'),
+    path('valid/<int:post_id>/', PostValidView.as_view(), name='valid'),
     path('search/', Search.as_view(), name='search'),
     path('logout/', ProfileLogoutView.as_view(), name='logout'),
 

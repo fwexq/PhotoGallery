@@ -1,4 +1,3 @@
-from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, UpdateView
