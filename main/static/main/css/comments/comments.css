@@ -87,3 +87,11 @@ textarea {
 .text-white {
     color: #fff!important;
 }
+.reply {
+    color: #000000;
+    background: none;
+    margin-top: -60px;
+    margin-left: 70px;
+    border: none;
+    font-weight: 900;
+}
