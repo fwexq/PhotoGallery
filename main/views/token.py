@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from ..forms import *
-from ..services.main.token import TokenService
+from main.services.main.accounts.token import TokenService
 
 
 class TokenView(View):

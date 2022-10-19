@@ -21,7 +21,7 @@
 
 li, a, ul {
     text-decoration: None;
-    color: #fedca3;
+    color: #ffffff;
     font-weight: bolder;
     font-style: italic;
     cursor: pointer;
@@ -47,7 +47,7 @@ li:hover {
 
 p {
     font-size: 24px;
-    margin-left: 40px;
+    margin-left: 160px;
     color: #fedca3;
 }
 
@@ -71,21 +71,30 @@ p {
 }
 
 .btn-light {
-    color: #b5b5b5;
+    color: #78674d;
     background-color: #000000;
     border-color: #d6dca3;
-    border: 1px solid;
+    border: 2px solid;
     border-radius: 10px;
     padding: 7px;
+    margin-top: -20px;
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 .btn-light:hover {
-    color: #ffffff;
+    color: #000000;
     cursor: pointer;
-    background-color: #fedca3;
+    background-color: #78674d;
     border-color: #fedca3;
-    border: 1px solid;
+    /* border: 2px solid; */
     border-radius: 10px;
     padding: 7px;
-    transition: 1s;
+    transition: 2s;
+    font-weight: bold;
+}
+
+a:hover{
+    color: black;
+
 }

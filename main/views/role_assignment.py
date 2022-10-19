@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import *
-from ..services.main.role_assignment import RoleAssignmentService
+from main.services.main.admin.role_assignment import RoleAssignmentService
 
 
 class RoleAssignmentView(View):
