@@ -140,7 +140,7 @@
                         {% else %}
                         <form action="{% url 'posts_like' pk=post_obj.id %}" method="POST" class="ui form">
                             {% csrf_token %}
-                            <input name="post_id" value="{{ post_obj.id }}">
+                            <input type="hidden" name="post_id" value="{{ post_obj.id }}">
                             <a data-tooltip="In order to like, you must be logged in ">
                                 <i class="fa-solid fa-heart inactive"></i>
                                 <strong class="inactive "> {{ post_obj.liked.all.count }} </strong>
@@ -157,13 +157,9 @@
 
         <div class="album py-5 bg-light-c">
             <form action="{% url 'comments' post_id=post_obj.id %}" method="post">
-            <input type="hidden" name="parent" value="{{ comment.id }}">
                 {% csrf_token %}
-
-
                 {{ comment_form.as_p }}
                 {% if user.is_authenticated or backends.associated or request.user.is_staff %}
-
                 <button type="submit" class="btn btn-light-c">Send</button>
                     <button type="reset" class="btn btn-light-c"><i class="fa-regular fa-trash-can"></i></button>
             </form>
@@ -175,51 +171,12 @@
             {% endif %}
 
 
+
             {% for comment in comments %}
-            <div class="image-c ">
-                <a class="d-flex align-items-center text-white text-decoration-none">
-                    <img src="{{ comment.user.avatar.url }}" alt="" width="50" height="50" class="rounded-circle me-2">
-                    <strong class="first-name ">{{comment.user.first_name}}</strong>
-                </a></div>
-            <p class="text ">{{ comment.text }}</p>
+                {% if comment.parent == '' or comment.parent == null %}
+                    {% include 'main/posts/comment.html' with comment=comment %}
 
 
-              <div id="newItemButton"> <button type="submit" id="showForm" class="reply">Reply</button></div>
-                <form action="{% url 'comments' post_id=post_obj.id %}" id="newItemForm" method="POST">
-                <input type="hidden" name="parent" value='{{ comment.id }}'>
-                        {% csrf_token %}
-               {{ comment_form.as_p }}
-                        <button type="submit" id="addButton" class="">Отправить</button>
-                        </form>
-
-{#                <script>#}
-{#                $(function (){#}
-{#                    var $newItemButton = $('#newItemButton');#}
-{#                    var $newItemForm = $('#newItemForm');#}
-{#                    var $textInput = $('input:text');#}
-{##}
-{#                    $newItemButton.show();#}
-{#                    $newItemForm.hide();#}
-{##}
-{#                    $('#showForm').on('click', function () {#}
-{##}
-{#                        $newItemButton.hide();#}
-{#                        $newItemForm.show();#}
-{#                    });#}
-{#                    $newItemForm.on('submit', function(e){#}
-{##}
-{#                        e.preventDefault();#}
-{#                        var newText = $('input:text').val()#}
-{#                        console.log(newText);#}
-{#                        $newItemForm.hide();#}
-{#                        $newItemButton.show();#}
-{#                        $textInput.val('');#}
-{##}
-{#                    })#}
-{##}
-{##}
-{#                })#}
-{#                </script>#}
 
 {#                <button type="submit" class="reply">Reply</button>#}
 {#                                        <form class = 'reply' method="POST" name="contactForm" id="contactForm"  >#}
@@ -237,28 +194,24 @@
 
 
 
-            <p class="created_at ">{{ comment.created_at }}</p>
 
-                     {% if comment.parent %}
-Дочерний коммент {{ comment.parent.text }} Пользователь {{ comment.parent.user }}
-
+                {% else %}
                             <div class="image-c ">
                 <a class="d-flex align-items-center text-white text-decoration-none">
 
-                    <img src="{{ comment.parent.user.avatar.url }}" alt="" width="50" height="50" class="rounded-circle me-2">
-                    <strong class="first-name ">{{comment.parent.user.first_name}}</strong>
+                    <img src="{{ comment.user.avatar.url }}" alt="" width="50" height="50" class="rounded-circle me-2">
+                    <strong class="first-name ">{{comment.user.first_name}}</strong>
                 </a></div>
-            <p class="text ">{{ comment.parent.text }}</p>
-
-
+            <p class="text ">{{ comment.text }}</p>
               <div id="newItemButton"> <button type="submit" id="showForm" class="reply">Reply</button></div>
-                <form id="newItemForm" method="POST">
-                <input name="parent" value='{{ comment.id }}'>
+                    <form action="{% url 'comments' post_id=post_obj.id %}" id="newItemForm" method="POST">
+                <input type="hidden"name="parent" value='{{ comment.id }}'>
                         {% csrf_token %}
                {{ comment_form.as_p }}
                         <button type="submit" id="addButton" class="">Отправить</button>
                         </form>
-{% endif %}
+ <p class="created_at ">{{ comment.created_at }}</p>
+                {% endif %}
             {% endfor %}
 
 
@@ -273,3 +226,19 @@
 
 
     {% endblock %}
+
+ <script>
+     console.log('ййй')
+     $(function (){
+         $('.reply').on('click', function (event) {
+             let parent_id = Number(event.target.id.split('_')[2]);
+             let reply = event.target;
+             $(reply).parent().hide();
+             let comment_form = $(`#comment_form_id_${parent_id}`);
+             comment_form.show();
+             console.log(event)
+
+         });
+
+     })
+</script>

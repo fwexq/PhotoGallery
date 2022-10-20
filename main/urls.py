@@ -24,14 +24,17 @@ urlpatterns = [
     path('create/', CreatePostView.as_view(), name='posts_create'),
     path('update/<int:post_id>/', PostUpdateView.as_view(), name='posts_update'),
     path('delete/<int:post_id>/', PostDeleteView.as_view(), name='posts_delete'),
+
+    path('detail/<int:post_id>/comments', CommentsView.as_view(), name='comments'),
     path('detail/<int:post_id>', DetailPostView.as_view(), name='posts_detail'),
+
     path('post/moderation/', PostModerationListView.as_view(), name='post_list_moderation'),
 
 
     path('posts/<str:status>/', PostStatusView.as_view(), name='account_posts_list'),
 
 
-    path('detail/<int:post_id>/comments', CommentsView.as_view(), name='comments'),
+
     path('likes/<int:pk>', LikesView.as_view(), name='posts_like'),
     path('invalid/<int:post_id>/', PostInvalidView.as_view(), name='invalid'),
     path('valid/<int:post_id>/', PostValidView.as_view(), name='valid'),

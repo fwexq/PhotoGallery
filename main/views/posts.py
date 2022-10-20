@@ -26,7 +26,7 @@ class PostListView(DataMixin, ListView):
 class DetailPostView(DataMixin, View):
     def get(self, request, *args, **kwargs):
         post_obj = Post.objects.get(pk=kwargs['post_id'])
-        comments = post_obj.comments.all()
+        comments = post_obj.comments.filter(parent=None)
         user = request.user.id
         comment_form = CommentForm()
         return render(request,
