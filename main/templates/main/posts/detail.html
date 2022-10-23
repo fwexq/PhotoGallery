@@ -173,45 +173,7 @@
 
 
             {% for comment in comments %}
-                {% if comment.parent == '' or comment.parent == null %}
-                    {% include 'main/posts/comment.html' with comment=comment %}
-
-
-
-{#                <button type="submit" class="reply">Reply</button>#}
-{#                                        <form class = 'reply' method="POST" name="contactForm" id="contactForm"  >#}
-{#                        {% csrf_token %}#}
-{#                <input type="text" placeholder="добавь описание">#}
-{#                        <button type="submit" class="">Отправить</button>#}
-{#                        </form>#}
-{#                <script>#}
-{#                $(function (){#}
-{#                    var $newItemButton =#}
-{##}
-{##}
-{#                })#}
-{#                </script>#}
-
-
-
-
-                {% else %}
-                            <div class="image-c ">
-                <a class="d-flex align-items-center text-white text-decoration-none">
-
-                    <img src="{{ comment.user.avatar.url }}" alt="" width="50" height="50" class="rounded-circle me-2">
-                    <strong class="first-name ">{{comment.user.first_name}}</strong>
-                </a></div>
-            <p class="text ">{{ comment.text }}</p>
-              <div id="newItemButton"> <button type="submit" id="showForm" class="reply">Reply</button></div>
-                    <form action="{% url 'comments' post_id=post_obj.id %}" id="newItemForm" method="POST">
-                <input type="hidden"name="parent" value='{{ comment.id }}'>
-                        {% csrf_token %}
-               {{ comment_form.as_p }}
-                        <button type="submit" id="addButton" class="">Отправить</button>
-                        </form>
- <p class="created_at ">{{ comment.created_at }}</p>
-                {% endif %}
+                {% include 'main/posts/comment.html' with comment=comment %}
             {% endfor %}
 
 
@@ -228,17 +190,15 @@
     {% endblock %}
 
  <script>
-     console.log('ййй')
-     $(function (){
-         $('.reply').on('click', function (event) {
-             let parent_id = Number(event.target.id.split('_')[2]);
+     $('.reply').on('click', function (event) {
+             let parent_id = event.target.id.split('_')[2];
              let reply = event.target;
-             $(reply).parent().hide();
+             $(reply).hide();
              let comment_form = $(`#comment_form_id_${parent_id}`);
              comment_form.show();
-             console.log(event)
-
          });
 
-     })
+
 </script>
+
+
