@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.views import View
-from ..services.main.posts.valid_or_invalid_posts import PostInvalidService, PostValidService
+
+from RestAPI.services.main.posts.valid_or_invalid_posts import PostInvalidService, PostValidService
 
 
 class PostInvalidView(View):

@@ -95,7 +95,7 @@ $(function () {
     var $form = $(this).closest('form')
     var $requestMethod = $form.find('.request-method')
     var $requestUrl = $form.find('.request-url')
-    var $toggleView = $form.closest('.modal-content').find('.toggle-view')
+    var $toggleView = $form.closest('.modal-content').find('.toggle-views')
     var $responseStatusCode = $form.find('.response-status-code')
     var $meta = $form.find('.meta')
     var $responseRawResponse = $form.find('.response-raw-response')
@@ -246,7 +246,7 @@ $(function () {
   })
 
   // 'Data'/'Raw' control
-  $('.toggle-view button').click(function () {
+  $('.toggle-views button').click(function () {
     var $modalContent = $(this).closest('.modal-content')
     var $modalResponseRaw = $modalContent.find('.response-raw')
     var $modalResponseData = $modalContent.find('.response-data')

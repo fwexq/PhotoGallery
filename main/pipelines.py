@@ -7,16 +7,6 @@ from main.models import CustomUser
 
 def save_user_profile(backend, request, user, response, *args, **kwargs):
     if backend.name == 'google-oauth2':
-        date = timezone.now().date()
-        today = CustomUser.objects.filter(day=date)
-        if today:
-            user.day = timezone.now()
-            user.count += 1
-        else:
-            user.dayTime = date
-            user.count = 1
-        user.save()
-
         # https://www.googleapis.com//oauth2/v2/userinfo?access_token=ya29.A0AVA9y1vsQ89Y_g78qO7ird_2lBfhlBKjZ4ItT1ReMYtW8viUJZYz2EBamOoXHxm2C_1_KTcXkhck1mwagZZ6RdWbh9OvN7m3ht8uWMJOd0qUtqMILTVWUzkKLSgcaVXWRXbgaRg_GfxHVwXvgbDNu48EeMfiqwYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4NXhEZWtkZFlHSXBNWVk4WkdKc2pVdw0165
         resp = requests.get('https://www.googleapis.com//oauth2/v2/userinfo?access_token=' + response['access_token'])
         print(resp)
@@ -35,15 +25,6 @@ def save_user_profile(backend, request, user, response, *args, **kwargs):
 
     elif backend.name == 'vk-oauth2':
 
-        date = timezone.now().date()
-        today = CustomUser.objects.filter(day=date)
-        if today:
-            user.count += 1
-        else:
-            day_visits = CustomUser()
-            day_visits.dayTime = date
-            day_visits.count = 1
-        user.save()
 
         api_url = urlunparse(('http', 'api.vk.com', 'method/photos.get', None,
                           urlencode(

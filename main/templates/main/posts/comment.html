@@ -1,4 +1,4 @@
-<div class="{% if comment.parent_id %}ololo{% endif %}">
+<div class="{% if comment.parent_id %}ololo{% endif %}" >
     <div  class="image-c">
         <a class="d-flex align-items-center text-white text-decoration-none">
             <img src="{{ comment.user.avatar.url }}" alt="" width="50" height="50" class="rounded-circle me-2">
@@ -14,11 +14,11 @@
         <form action="{% url 'comments' post_id=post_obj.id %}" class="hidden" id="comment_form_id_{{comment.id}}" method="POST">
         <input type="hidden" name="parent" value='{{ comment.id }}'>
                 {% csrf_token %}
-       {{ comment_form.as_p }}
-                <button type="submit" id="addButton" class="">Отправить</button>
+            <label>{{ comment_form.as_p }}</label>
+                <button type="submit" id="addButton" class="">Reply</button>
                </form>
 
-         <p class="created_at ">{{ comment.created_at }}</p>
+         <p class="{% if comment.parent_id %}created_at_up{% else %}created_at{% endif %} ">{{ comment.created_at }}</p>
 
     {% for comment in comment.parent_comment.all %}
         {% include 'main/posts/comment.html' with comment=comment %}

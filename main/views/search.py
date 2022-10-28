@@ -1,7 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import generics
+
+from RestAPI.services.main.menu.search import SearchService
 from ..serializers import PostSerializer
-from main.services.main.menu.search import SearchService
+
 
 
 class Search(generics.ListAPIView):

@@ -14,7 +14,6 @@ from .views.token import TokenView
 
 
 urlpatterns = [
-
     path('authorization/', AuthorizationView.as_view(), name='authorization'),
     path('token/', TokenView.as_view(), name='token'),
     path('profile/<int:pk>/', ProfileView.as_view(), name='profile'),

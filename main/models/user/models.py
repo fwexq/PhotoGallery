@@ -21,11 +21,7 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='user/images', max_length=1024, default='user/images/default_avatar.jpg', verbose_name="Аватар")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
-    ip = models.CharField(max_length=255, verbose_name='Айпи адрес')
-    total_visits = models.IntegerField(default=0, verbose_name='Количество посещений сайта за все время')
-    day = models.DateField(default=timezone.now, verbose_name='Сегодняшнее число')
-    day_visits = models.IntegerField(default=0, verbose_name='Количество посещений в течение дня')
-    count = models.IntegerField(verbose_name='Количество посещений сайта', default=0)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

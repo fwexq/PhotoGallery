@@ -176,16 +176,9 @@
                 {% include 'main/posts/comment.html' with comment=comment %}
             {% endfor %}
 
-
-
         </div>
 
-
     </div>
-
-
-
-
 
     {% endblock %}
 
@@ -196,9 +189,11 @@
              $(reply).hide();
              let comment_form = $(`#comment_form_id_${parent_id}`);
              comment_form.show();
+             $('.created_at_up').css('margin-top', '-=25px');
          });
 
 
 </script>
+
 
 

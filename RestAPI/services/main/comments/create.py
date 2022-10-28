@@ -19,4 +19,5 @@ class CommentsCreateService(Service):
         if self.cleaned_data['parent']:
             comment.parent_id = self.cleaned_data['parent']
         comment.save()
+        return comment
 

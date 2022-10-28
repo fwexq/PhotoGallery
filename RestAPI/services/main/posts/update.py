@@ -1,6 +1,5 @@
 from django import forms
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
 from service_objects.services import Service
 from main.models import Post
 
@@ -22,5 +21,6 @@ class PostUpdateService(Service):
         post.moderation_status = 'NOT_MODERATED'
         # post.publicated_at = timezone.now()
         post.save()
+        return  post
 
 

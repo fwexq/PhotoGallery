@@ -65,6 +65,13 @@ textarea {
     float: right;
 }
 
+.created_at_up {
+    font-size: 13px;
+    color: #ffffff;
+    margin-top: -78px;
+    width: 12%;
+    float: right;
+}
 .form-control {
     display: block;
     margin-top: -20px;
@@ -77,7 +84,7 @@ textarea {
     color: #e1d9d7;
     background-color: #fff;
     background-clip: padding-box;
-    border: 2px solid var(--descriprion-border-info);
+    border: 1px solid var(--descriprion-border-info);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -100,4 +107,12 @@ textarea {
 }
 .hidden {
     display: none;
+    margin-top: -40px;
+    margin-left: 70px;
+}
+#addButton {
+    color: white;
+    border-radius: 10px;
+    background: #d0d0d0b0;
+    border: 2px solid #d8d6d6;
 }

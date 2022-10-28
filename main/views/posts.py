@@ -1,15 +1,14 @@
-from django.contrib import messages
-from django.db.models.fields.files import ImageFieldFile
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+
+from RestAPI.services.main.posts.create import CreatePostService
+from RestAPI.services.main.posts.update import PostUpdateService
 from ..forms import *
 from main.utils import DataMixin
 from ..models.post.models import Post
-from ..services.main.posts.create import CreatePostService
-from ..services.main.posts.update import PostUpdateService
+
 
 
 class PostListView(DataMixin, ListView):

@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'service_objects',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
 # https://stackoverflow.com/questions/16068518/django-site-matching-query-does-not-exist
 
 MIDDLEWARE = [
@@ -213,3 +218,6 @@ SOCIAL_AUTH_PIPELINE = (
 #         }
 #     }
 #
+API_SCHEME = os.getenv('API_SCHEME', default='http')
+API_DOMAIN = os.getenv('API_DOMAIN', default='127.0.0.1')
+API_PORT = os.getenv('API_PORT', default='8000')
