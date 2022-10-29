@@ -17,5 +17,4 @@ class CreatePostService(Service):
             author=self.cleaned_data['user']
         )
         self.post.save()
-        outcome = self.post
-        return outcome
+        return self.post

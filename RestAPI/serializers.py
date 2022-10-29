@@ -17,11 +17,6 @@ class UserSerializers(serializers.ModelSerializer):
             return f'{API_SCHEME}://{API_DOMAIN}:{API_PORT}/{MEDIA_ROOT_SHORT}/{record.avatar}'
 
 
-class CommentSerializers(serializers.ModelSerializer):
-    model = Comment
-    fields = "__all__"
-
-
 class PostSerializers(serializers.ModelSerializer):
     author = UserSerializers(read_only=True)
     photo_url = serializers.SerializerMethodField()
@@ -36,3 +31,10 @@ class PostSerializers(serializers.ModelSerializer):
             return f'{API_SCHEME}://{API_DOMAIN}:{API_PORT}/{MEDIA_ROOT_SHORT}/{record.photo}'
 
 
+class CommentSerializers(serializers.ModelSerializer):
+    user = UserSerializers(read_only=True)
+    post = PostSerializers()
+
+    class Meta:
+        model = Comment
+        fields = ("id", "user", "post", "text", "created_at", "updated_at", "parent")

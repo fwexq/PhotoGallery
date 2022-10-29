@@ -10,8 +10,7 @@ class PostAddListView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all()
-        return Response({"posts": PostSerializers(posts, many=True).data}, status=status.HTTP_200_OK)
+        return Response({"posts": PostSerializers(Post.objects.all(), many=True).data}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         outcome = CreatePostService.execute(request.data.dict() | {'user': request.user}, request.FILES)
