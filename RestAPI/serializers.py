@@ -23,7 +23,7 @@ class PostSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("id", "title", "description", "author", "photo_url")
+        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at")
 
     @classmethod
     def get_photo_url(cls, record):
@@ -38,3 +38,11 @@ class CommentSerializers(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ("id", "user", "post", "text", "created_at", "updated_at", "parent")
+
+
+class TokenSerializers(serializers.ModelSerializer):
+    user = UserSerializers(read_only=True)
+
+    class Meta:
+        model = Token
+        fields = ("user", "key", "created")

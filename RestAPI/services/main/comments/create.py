@@ -18,6 +18,8 @@ class CommentsCreateService(Service):
         )
         if self.cleaned_data['parent']:
             comment.parent_id = self.cleaned_data['parent']
-        comment.save()
-        return comment
-
+        if self.cleaned_data['user'].is_authenticated:
+            comment.save()
+            return comment
+        else:
+            return f'Authentication credentials were not provided'

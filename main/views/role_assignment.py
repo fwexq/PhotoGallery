@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
 
-from RestAPI.services.main.admin.role_assignment import RoleAssignmentService
+from RestAPI.services.main.admin.role_assignment import CustomUserChangeRoleServices
 from ..forms import *
-
 
 
 class RoleAssignmentView(View):
@@ -11,7 +10,7 @@ class RoleAssignmentView(View):
     form_class = RoleAssignment
 
     def post(self, request, *args, **kwargs):
-        RoleAssignmentService.execute(request.POST)
+        CustomUserChangeRoleServices.execute(request.POST)
         return redirect('posts_list')
 
     def get(self, request):

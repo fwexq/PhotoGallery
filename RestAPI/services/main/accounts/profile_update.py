@@ -11,12 +11,16 @@ class ProfileUpdateService(Service):
     user = ModelField(CustomUser)
 
     def process(self):
-        user = self.cleaned_data['user']
-        if self.cleaned_data['first_name']:
-            user.first_name = self.cleaned_data['first_name']
-        if self.cleaned_data['last_name']:
-            user.last_name = self.cleaned_data['last_name']
-        if self.cleaned_data['avatar']:
-            user.avatar = self.cleaned_data['avatar']
-        user.save()
-        return self
+        if self.cleaned_data['user'].id == self.data['pk']:
+            user = self.cleaned_data['user']
+            if self.cleaned_data['first_name']:
+                user.first_name = self.cleaned_data['first_name']
+            if self.cleaned_data['last_name']:
+                user.last_name = self.cleaned_data['last_name']
+            if self.cleaned_data['avatar']:
+                user.avatar = self.cleaned_data['avatar']
+            user.save()
+            return user
+        else:
+            return f'You are not this user'
+

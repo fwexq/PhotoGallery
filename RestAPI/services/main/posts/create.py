@@ -10,11 +10,14 @@ class CreatePostService(Service):
     user = ModelField(CustomUser)
 
     def process(self):
-        self.post = Post(
-            title=self.cleaned_data['title'],
-            description=self.cleaned_data['description'],
-            photo=self.cleaned_data['photo'],
-            author=self.cleaned_data['user']
-        )
-        self.post.save()
-        return self.post
+        if self.cleaned_data['user'].is_authenticated:
+            self.post = Post(
+                title=self.cleaned_data['title'],
+                description=self.cleaned_data['description'],
+                photo=self.cleaned_data['photo'],
+                author=self.cleaned_data['user']
+            )
+            self.post.save()
+            return self.post
+        else:
+            return f'Authentication credentials were not provided'
