@@ -14,7 +14,7 @@ from RestAPI.views.user.update import UserUpdateView
 
 urlpatterns = [
     path('posts/', PostsListView.as_view(), name='posts'), #Просмотр всех постов
-    path('posts/create/', PostAddView.as_view(), name='add_posts'), #Просмотр всех постов
+    path('posts/create/', PostAddView.as_view(), name='add_posts'), #Создание поста
     path('post/detailUpdateDestroy/<int:pk>/', PostDetailUpdateDestroyView.as_view(), name='detailUpdateDestroy_post'), #Просмотр, обновление, удаление поста
     path('user/info/', UserDetailView.as_view(), name='current_user'), #Просмотр текущего пользователя
     path('user/update/<int:pk>/', UserUpdateView.as_view(), name='update_current_user'), #Изменение профиля
