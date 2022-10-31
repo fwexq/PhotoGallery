@@ -46,3 +46,10 @@ class TokenSerializers(serializers.ModelSerializer):
     class Meta:
         model = Token
         fields = ("user", "key", "created")
+
+# class LikeSerializers(serializers.ModelSerializer):
+#     user = UserSerializers(read_only=True)
+#     post = PostSerializers()
+#     class Meta:
+#         model = Like
+#         fields = ("id", "user", "post")
