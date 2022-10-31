@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from RestAPI.serializers import UserSerializers
-from RestAPI.services.main.accounts.profile_update import ProfileUpdateService
+from RestAPI.services.main.user.profile_update import ProfileUpdateService
 
 
 class UserUpdateView(UpdateAPIView):

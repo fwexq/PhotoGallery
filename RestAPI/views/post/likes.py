@@ -2,7 +2,7 @@
 # from rest_framework.response import Response
 #
 # from RestAPI.serializers import LikeSerializers
-# from RestAPI.services.main.posts.likes import LikesService
+# from RestAPI.services.main.post.likes import LikesService
 #
 #
 # class PostAddLikeView(generics.CreateAPIView):

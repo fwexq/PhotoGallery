@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
-from RestAPI.services.main.posts.create import CreatePostService
-from RestAPI.services.main.posts.update import PostUpdateService
+from RestAPI.services.main.post.create import CreatePostService
+from RestAPI.services.main.post.update import PostUpdateService
 from ..forms import *
 from main.utils import DataMixin
 from ..models.post.models import Post

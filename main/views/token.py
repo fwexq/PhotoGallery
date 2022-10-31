@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from RestAPI.services.main.accounts.token import TokenService
+from RestAPI.services.main.user.token import TokenService
 from ..forms import *
 
 

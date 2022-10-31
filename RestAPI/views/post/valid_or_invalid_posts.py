@@ -1,7 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from RestAPI.serializers import PostSerializers
-from RestAPI.services.main.posts.valid_or_invalid_posts import PostInvalidService, PostValidService
+from RestAPI.services.main.post.valid_or_invalid_posts import PostInvalidService, PostValidService
 
 
 class PostInvalidView(generics.ListAPIView):

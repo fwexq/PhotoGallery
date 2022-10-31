@@ -2,6 +2,8 @@ from functools import lru_cache
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from service_objects.services import Service
+
+from RestAPI.errors import ForbiddenError
 from main.models import Post
 
 
@@ -14,8 +16,9 @@ class PostUpdateService(Service):
     def process(self):
         self._check_post_presence()
         if self._post:
-            self._update_post()
-            self.result = self._post
+            if self._check_user_rights():
+                self._update_post()
+                self.result = self._post
         return self
 
     @property
@@ -36,6 +39,10 @@ class PostUpdateService(Service):
             self._post.photo = self.cleaned_data['photo']
         self._post.moderation_status = 'NOT_MODERATED'
         self._post.save()
+
+    def _check_user_rights(self):
+        if not self.cleaned_data['user'].id == self._post.author.id:
+            self.errors["user"] = ForbiddenError(f"User id {self.cleaned_data['user'].id} has no rights")
 
     def _check_post_presence(self):
         if self._post:

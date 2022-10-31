@@ -2,17 +2,19 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics, status
 from rest_framework.response import Response
 from RestAPI.serializers import PostSerializers
-from RestAPI.services.main.posts.delete import DeletePostService
-from RestAPI.services.main.posts.update import PostUpdateService
+from RestAPI.services.main.post.delete import DeletePostService
+from RestAPI.services.main.post.update import PostUpdateService
+from RestAPI.services.main.post.get import PostGetService
 from main.models import Post
 
 
 class PostDetailUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializers
 
-    def get(self, request, *args, **kwargs): #сервис
+    def get(self, request, *args, **kwargs):
+        outcome = PostGetService.execute(kwargs | request.POST.dict(), request.FILES)
         try:
-            return Response(PostSerializers(Post.objects.get(pk=kwargs['pk'])).data, status=status.HTTP_200_OK)
+            return Response(PostSerializers(outcome.result).data, status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -24,6 +26,9 @@ class PostDetailUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
             return Response(PostSerializers(outcome.result).data, status=status.HTTP_200_OK)
 
     def delete(self, request, *args, **kwargs):
-        message = DeletePostService.execute(kwargs | request.POST.dict() | {"user": request.user})
-        return Response({"post": message})
+        outcome = DeletePostService.execute(kwargs | request.POST.dict() | {'user': request.user})
+        if outcome.errors:
+            return Response({key: str(error) for key, error in outcome.errors.items()}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(outcome.result)
 

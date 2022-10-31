@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views import View
-from RestAPI.services.main.posts.likes import LikesService
+from RestAPI.services.main.post.likes import LikesService
 
 
 class LikesView(View):

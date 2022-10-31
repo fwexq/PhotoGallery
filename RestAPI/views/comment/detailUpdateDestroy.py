@@ -1,8 +1,8 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from RestAPI.serializers import CommentSerializers
-from RestAPI.services.main.comments.delete import DeleteCommentService
-from RestAPI.services.main.comments.update import CommentUpdateService
+from RestAPI.services.main.comment.delete import DeleteCommentService
+from RestAPI.services.main.comment.update import CommentUpdateService
 from main.models import Comment
 
 
