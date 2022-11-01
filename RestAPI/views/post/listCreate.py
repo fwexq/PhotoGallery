@@ -12,16 +12,14 @@ class PostListCreate(generics.ListCreateAPIView):
     serializer_class = PostSerializers
 
     def get(self, request, *args, **kwargs):
-        outcome = PostListService.execute(kwargs | request.POST.dict(), request.FILES)
-        try:
-            return Response(PostSerializers(outcome.result, many=True).data, status=status.HTTP_200_OK)
-        except ObjectDoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(PostSerializers(PostListService.execute(kwargs).result, many=True).data,
+                        status=status.HTTP_200_OK)
 
     @permission_classes([IsAuthenticated])
     def post(self, request, *args, **kwargs):
         outcome = CreatePostService.execute(request.data.dict() | {'user': request.user}, request.FILES)
         if outcome.errors:
-            return Response({key: str(error) for key, error in outcome.errors.items()}, status=status.HTTP_404_NOT_FOUND)
+            return Response({key: str(error) for key, error in outcome.errors.items()},
+                            status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({"post": PostSerializers(outcome.result).data}, status=status.HTTP_200_OK)

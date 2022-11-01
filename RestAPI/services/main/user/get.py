@@ -9,12 +9,7 @@ class UserGetService(Service):
     user = ModelField(CustomUser)
 
     def process(self):
-        self.result = self._user
+        self.result = self.cleaned_data["user"]
         return self
 
-    @property
-    def _user(self):
-        try:
-            return CustomUser.objects.get(pk=self.cleaned_data["user"].id)
-        except ObjectDoesNotExist:
-            return None
+

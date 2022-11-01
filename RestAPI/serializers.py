@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
 from compet.settings import API_SCHEME, API_DOMAIN, API_PORT, MEDIA_ROOT_SHORT
@@ -6,15 +7,24 @@ from main.models import *
 
 class UserSerializers(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField()
+    token = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = CustomUser
-        fields = ("id", "first_name", "last_name", "email", "avatar_url")
+        fields = ("id", "first_name", "last_name", "email", "avatar_url", "token")
 
     @classmethod
     def get_avatar_url(cls, record):
         if record.avatar:
             return f'{API_SCHEME}://{API_DOMAIN}:{API_PORT}/{MEDIA_ROOT_SHORT}/{record.avatar}'
+
+    @classmethod
+    def get_token(cls, record):
+        try:
+            return record.auth_token.key
+        except ObjectDoesNotExist:
+            return None
+
 
 
 class PostSerializers(serializers.ModelSerializer):

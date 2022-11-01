@@ -9,7 +9,6 @@ from RestAPI.services.main.user.token import TokenService
 
 class UserDetailView(generics.ListCreateAPIView):
     serializer_class = UserSerializers
-
     def get(self, request, *args, **kwargs):
         outcome = UserGetService.execute({"user": request.user})
         if outcome.errors:

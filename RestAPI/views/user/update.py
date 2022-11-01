@@ -13,8 +13,8 @@ class UserUpdateView(UpdateAPIView):
 
     def patch(self, request, *args, **kwargs):
         outcome = ProfileUpdateService.execute(kwargs | request.POST.dict() | {'user': request.user}, request.FILES)
-        if type(outcome) == str:
-            return Response({"updated_user": outcome}, status=status.HTTP_200_OK)
+        if outcome.errors:
+            return Response({key: str(error) for key, error in outcome.errors.items()}, status=status.HTTP_404_NOT_FOUND)
         else:
-            return Response({"updated_user": UserSerializers(outcome).data}, status=status.HTTP_200_OK)
+            return Response(UserSerializers(outcome.result).data, status=status.HTTP_200_OK)
 

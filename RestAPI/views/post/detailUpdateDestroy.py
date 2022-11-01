@@ -13,10 +13,11 @@ class PostDetailUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
     def get(self, request, *args, **kwargs):
         outcome = PostGetService.execute(kwargs | request.POST.dict(), request.FILES)
-        try:
+        if outcome.errors:
+            return Response({key: str(error) for key, error in outcome.errors.items()},
+                            status=status.HTTP_404_NOT_FOUND)
+        else:
             return Response(PostSerializers(outcome.result).data, status=status.HTTP_200_OK)
-        except ObjectDoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def patch(self, request, *args, **kwargs):
         outcome = PostUpdateService.execute(kwargs | request.POST.dict() | {'user': request.user}, request.FILES)
@@ -30,5 +31,5 @@ class PostDetailUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         if outcome.errors:
             return Response({key: str(error) for key, error in outcome.errors.items()}, status=status.HTTP_404_NOT_FOUND)
         else:
-            return Response(outcome.result)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
