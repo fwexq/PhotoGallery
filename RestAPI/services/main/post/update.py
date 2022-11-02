@@ -4,20 +4,25 @@ from django.core.exceptions import ObjectDoesNotExist
 from service_objects.services import Service
 
 from RestAPI.errors import ForbiddenError
-from main.models import Post
+from main.models import Post, CustomUser
 
 
 class PostUpdateService(Service):
-    pk = forms.IntegerField()
+    post_id = forms.IntegerField()
     title = forms.CharField(required=False, max_length=40)
     description = forms.CharField(required=False, max_length=80)
     photo = forms.ImageField(required=False)
+    moderation_status = forms.CharField(required=False)
 
     def process(self):
         self._check_post_presence()
         if self._post:
-            if self._check_user_rights():
-                self._update_post()
+            self._check_user_rights()
+            self._update_post()
+            if self._check_user_role():
+                post = self._update_moderation_status()
+                self.result = post
+            else:
                 self.result = self._post
         return self
 
@@ -25,7 +30,7 @@ class PostUpdateService(Service):
     @lru_cache()
     def _post(self):
         try:
-            return Post.objects.get(pk=self.cleaned_data['pk'])
+            return Post.objects.get(pk=self.cleaned_data['post_id'])
         except ObjectDoesNotExist:
             return None
 
@@ -40,14 +45,25 @@ class PostUpdateService(Service):
         self._post.moderation_status = 'NOT_MODERATED'
         self._post.save()
 
+    def _update_moderation_status(self):
+        self._post.moderation_status = self.cleaned_data.get('moderation_status')
+        self._post.save()
+        return self._post
+
     def _check_user_rights(self):
-        if not self.cleaned_data['user'].id == self._post.author.id:
-            self.errors["user"] = ForbiddenError(f"User id {self.cleaned_data['user'].id} has no rights")
+        if not self.data['user'].id == self._post.author.id:
+            self.errors["user"] = ForbiddenError(f"User id {self.data['user'].id} has no rights")
+        else:
+            pass
+
+    def _check_user_role(self):
+        if self.data["user"].is_superuser or self.data["user"].is_staff:
+            return True
+        else:
+            self.errors["user"] = ForbiddenError(f"User id {self._user.id} has no rights")
 
     def _check_post_presence(self):
         if self._post:
             pass
         else:
-            self.errors["pk"] = ObjectDoesNotExist(f"Post pk {self.cleaned_data['pk']} not found")
-
-
+            self.errors["post_id"] = ObjectDoesNotExist(f"Post pk {self.cleaned_data['post_id']} not found")

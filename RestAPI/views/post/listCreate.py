@@ -1,4 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics, status
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -8,7 +7,7 @@ from RestAPI.services.main.post.create import CreatePostService
 from RestAPI.services.main.post.list import PostListService
 
 
-class PostListCreate(generics.ListCreateAPIView):
+class PostListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializers
 
     def get(self, request, *args, **kwargs):

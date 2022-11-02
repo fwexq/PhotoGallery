@@ -6,7 +6,7 @@ from main.models import Post
 
 
 class PostGetService(Service):
-    pk = forms.IntegerField()
+    post_id = forms.IntegerField()
 
     def process(self):
         self._check_post_presenсe()
@@ -17,10 +17,10 @@ class PostGetService(Service):
     @lru_cache
     def _post(self):
         try:
-            return Post.objects.get(pk=self.cleaned_data['pk'])
+            return Post.objects.get(pk=self.cleaned_data['post_id'])
         except ObjectDoesNotExist:
             return None
 
     def _check_post_presenсe(self):
         if not self._post:
-            self.errors["pk"] = ObjectDoesNotExist(f"Post id {self._post} not found")
+            self.errors["post_id"] = ObjectDoesNotExist(f"Post id {self._post} not found")

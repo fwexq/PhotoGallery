@@ -6,12 +6,12 @@ from main.models import *
 
 
 class UserSerializers(serializers.ModelSerializer):
-    avatar_url = serializers.SerializerMethodField()
+    avatar_url = serializers.SerializerMethodField(read_only=True)
     token = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = CustomUser
-        fields = ("id", "first_name", "last_name", "email", "avatar_url", "token")
+        fields = ("id", "is_staff", "first_name", "last_name", "email", "avatar_url", "token")
 
     @classmethod
     def get_avatar_url(cls, record):
@@ -25,15 +25,26 @@ class UserSerializers(serializers.ModelSerializer):
         except ObjectDoesNotExist:
             return None
 
+class UserSerializerIdNameAvatarField(serializers.ModelSerializer):
+    avatar_url = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ("id", "first_name", "avatar_url")
+
+    @classmethod
+    def get_avatar_url(cls, record):
+        if record.avatar:
+            return f'{API_SCHEME}://{API_DOMAIN}:{API_PORT}/{MEDIA_ROOT_SHORT}/{record.avatar}'
 
 
 class PostSerializers(serializers.ModelSerializer):
     author = UserSerializers(read_only=True)
-    photo_url = serializers.SerializerMethodField()
+    photo_url = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Post
-        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at")
+        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at", "moderation_status")
 
     @classmethod
     def get_photo_url(cls, record):
@@ -42,12 +53,11 @@ class PostSerializers(serializers.ModelSerializer):
 
 
 class CommentSerializers(serializers.ModelSerializer):
-    user = UserSerializers(read_only=True)
-    post = PostSerializers()
+    user = UserSerializerIdNameAvatarField(read_only=True)
 
     class Meta:
         model = Comment
-        fields = ("id", "user", "post", "text", "created_at", "updated_at", "parent")
+        fields = ("id", "user", "text", "created_at", "updated_at", "parent")
 
 
 class TokenSerializers(serializers.ModelSerializer):

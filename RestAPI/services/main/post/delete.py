@@ -8,7 +8,7 @@ from main.models import CustomUser, Post
 
 
 class DeletePostService(Service):
-    pk = forms.IntegerField()
+    post_id = forms.IntegerField()
     user = ModelField(CustomUser)
 
     def process(self):
@@ -27,7 +27,7 @@ class DeletePostService(Service):
     @lru_cache
     def _post(self):
         try:
-            return Post.objects.get(pk=self.cleaned_data["pk"])
+            return Post.objects.get(pk=self.cleaned_data["post_id"])
         except ObjectDoesNotExist:
             return None
 
