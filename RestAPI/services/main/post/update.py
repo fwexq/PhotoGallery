@@ -46,9 +46,14 @@ class PostUpdateService(Service):
         self._post.save()
 
     def _update_moderation_status(self):
-        self._post.moderation_status = self.cleaned_data.get('moderation_status')
-        self._post.save()
-        return self._post
+        moderation_status = self.cleaned_data.get('moderation_status')
+        if moderation_status == 'VALID' or moderation_status == "INVALID" or moderation_status == "NOT_MODERATED":
+            self._post.moderation_status = moderation_status
+            self._post.save()
+            return self._post
+        else:
+            self.errors["moderation_status"] = SyntaxError("There is no such status. Select one of the statuses 'VALID', 'INVALID', 'NOT_MODERATED'")
+        return self
 
     def _check_user_rights(self):
         if not self.data['user'].id == self._post.author.id:

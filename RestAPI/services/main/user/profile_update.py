@@ -56,8 +56,14 @@ class ProfileUpdateService(Service):
             pass
 
     def _change_user_role(self):
-        is_staff = True if self.cleaned_data.get('is_staff') == 'On' else False
+        global is_staff
         user = CustomUser.objects.get(id=self.cleaned_data['user'].id)
+        if self.cleaned_data.get('is_staff') == 'On':
+            is_staff = True
+        elif self.cleaned_data.get('is_staff') == 'Off':
+            is_staff = False
+        else:
+            self.errors["moderation_status"] = SyntaxError("There is no such button")
         user.is_staff = is_staff
         user.save()
         return user
@@ -67,5 +73,3 @@ class ProfileUpdateService(Service):
             return True
         else:
             self.errors["user"] = ForbiddenError(f"User id {self._user.id} has no rights")
-
-
