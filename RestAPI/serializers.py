@@ -44,7 +44,7 @@ class PostSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at", "moderation_status")
+        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at", "moderation_status", "liked")
 
     @classmethod
     def get_photo_url(cls, record):
@@ -67,9 +67,9 @@ class TokenSerializers(serializers.ModelSerializer):
         model = Token
         fields = ("user", "key", "created")
 
-# class LikeSerializers(serializers.ModelSerializer):
-#     user = UserSerializers(read_only=True)
-#     post = PostSerializers()
-#     class Meta:
-#         model = Like
-#         fields = ("id", "user", "post")
+class LikeSerializers(serializers.ModelSerializer):
+    user = UserSerializers(read_only=True)
+    post = PostSerializers()
+    class Meta:
+        model = Like
+        fields = ("id", "user", "post")

@@ -1,12 +1,17 @@
-# from rest_framework import generics, status
-# from rest_framework.response import Response
-#
-# from RestAPI.serializers import LikeSerializers
-# from RestAPI.services.main.post.likes import LikesService
-#
-#
-# class PostAddLikeView(generics.CreateAPIView):
-#     serializer_class = LikeSerializers
-#     def post(self, request, *args, **kwargs):
-#         is_liked = LikesService.execute(kwargs | {'user': request.user})
-#         return Response({"post": LikeSerializers(is_liked, many=False).data}, status=status.HTTP_200_OK)
+from rest_framework import generics, status
+from rest_framework.response import Response
+
+from RestAPI.serializers import LikeSerializers
+from RestAPI.services.main.post.likes import LikesService
+
+
+class PostAddLikeView(generics.CreateAPIView):
+    serializer_class = LikeSerializers
+    def post(self, request, *args, **kwargs):
+        outcome = LikesService.execute(kwargs | {'user': request.user})
+        if outcome.errors:
+            return Response({key: str(error) for key, error in outcome.errors.items()},
+                            status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(LikeSerializers(outcome.result).data, status=status.HTTP_200_OK)
+

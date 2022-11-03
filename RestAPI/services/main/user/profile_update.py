@@ -46,7 +46,7 @@ class ProfileUpdateService(Service):
         self._user.save()
 
     def _check_user_rights(self):
-        if not self._user.id == self.data["pk"]:
+        if not self._user.id == self.data["user"].id:
             self.errors["user"] = ForbiddenError(f"User id {self._user.id} has no rights")
 
     def _check_user_presence(self):

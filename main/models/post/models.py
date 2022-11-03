@@ -9,9 +9,9 @@ class Manager(models.Manager):
     def get_queryset(self):
         return super(Manager, self).get_queryset().filter(is_deleted=False)
 
+
 class IsDeletedMixin(models.Model):
     is_deleted = models.BooleanField(default=False, verbose_name='На удаление')
-
     objects = Manager()
 
     def delete(self, using=None, keep_parents=False):
@@ -30,7 +30,6 @@ class IsDeletedMixin(models.Model):
 
 
 class Post(IsDeletedMixin):
-
     MODERATION_CHOICES = [
         ('NOT_MODERATED', 'На модерацию'),
         ('VALID', 'Опубликовано'),
@@ -49,7 +48,7 @@ class Post(IsDeletedMixin):
     publish = models.DateTimeField(default=timezone.now, verbose_name='Опубликовано')
     photo = models.ImageField(upload_to='post/images', verbose_name="Текущее фото")
     previous_photo = models.ImageField(upload_to='post/images', verbose_name="Предыдущее фото")
-    author = models.ForeignKey('CustomUser', on_delete=models.CASCADE, verbose_name="Автор",  related_name='author')
+    author = models.ForeignKey('CustomUser', on_delete=models.CASCADE, verbose_name="Автор", related_name='author')
     liked = models.ManyToManyField('CustomUser', blank=True, related_name='liked')
 
     def __str__(self):
@@ -58,7 +57,6 @@ class Post(IsDeletedMixin):
     @property
     def num_like(self):
         return self.likes.all().count()
-
 
     @property
     def liked_users(self):

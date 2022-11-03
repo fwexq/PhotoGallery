@@ -12,7 +12,6 @@ class DeletePostService(Service):
     user = ModelField(CustomUser)
 
     def process(self):
-        # self.check_post_presence()
         if self._post:
             self._check_user_rights()
             if self.errors:
