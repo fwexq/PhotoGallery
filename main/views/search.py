@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import generics
 
-from RestAPI.services.main.menu.search import SearchService
+from ..services.main.menu.search import SearchService
 from ..serializers import PostSerializer
 
 

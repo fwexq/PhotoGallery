@@ -2,9 +2,8 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, UpdateView
 
-from RestAPI.services.main.user.profile_update import ProfileUpdateService
 from ..forms import *
-
+from ..services.main.accounts.profile_update import ProfileUpdateService
 
 
 class ProfileView(ListView):

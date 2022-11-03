@@ -34,7 +34,7 @@ urlpatterns = [
 
 
 
-    path('likes/<int:post_id>', LikesView.as_view(), name='posts_like'),
+    path('likes/<int:pk>', LikesView.as_view(), name='posts_like'),
     path('invalid/<int:post_id>/', PostInvalidView.as_view(), name='invalid'),
     path('valid/<int:post_id>/', PostValidView.as_view(), name='valid'),
     path('search/', Search.as_view(), name='search'),
