@@ -49,7 +49,7 @@ class Post(IsDeletedMixin):
     photo = models.ImageField(upload_to='post/images', verbose_name="Текущее фото")
     previous_photo = models.ImageField(upload_to='post/images', verbose_name="Предыдущее фото")
     author = models.ForeignKey('CustomUser', on_delete=models.CASCADE, verbose_name="Автор", related_name='author')
-    liked = models.ManyToManyField('CustomUser', blank=True, related_name='liked')
+
 
     def __str__(self):
         return str(self.title)

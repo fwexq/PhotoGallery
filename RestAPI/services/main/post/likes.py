@@ -36,13 +36,11 @@ class LikesService(Service):
             user=self.cleaned_data['user'],
             pk=self.cleaned_data['post_id']
         )
-        post = Post.objects.get(pk=self.cleaned_data['post_id'])
-        if self.cleaned_data['user'] in post.liked.all():
-            post.liked.remove(self.cleaned_data['user'])
-            is_liked = False
+        if self.cleaned_data['user'] in self._post.likes.all():
+            self._post.likes.remove(self.cleaned_data['user'])
         else:
-            post.liked.add(self.cleaned_data['user'])
-            is_liked = True
-        post.save()
-        outcome = is_liked
+            self._post.likes.add(self.cleaned_data['user'])
+            is_likes = True
+        self._post.save()
+        outcome = is_likes
         return outcome

@@ -21,7 +21,7 @@
 
 
              {% if user.is_authenticated or backends.associated %}
-                <form action="{% url 'posts_like' pk=post.id %}" method="POST" class="ui form" class="like-form" id="{{ post.id }}">
+                <form action="{% url 'posts_like' post_id=post.id %}" method="POST" class="ui form" class="like-form" id="{{ post.id }}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-outline-secondary likin">
                         {% if content.id in already_liked %}
@@ -29,7 +29,7 @@
                         {% else %}
                             <a name="{{ content.id }}" style="color: red;" class="likin" id="co"><i class="fa-solid fa-heart"></i></a>
                         {% endif %}
-                        <strong class="white"> {{ post.liked.all.count }} </strong>
+                        <strong class="white"> {{ post.likes.all.count }} </strong>
                     </button>
                     <strong class="white"><i class="fa-solid fa-comments"></i> {{ post.comments.all.count }} </strong>
                 </form>

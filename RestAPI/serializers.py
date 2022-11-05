@@ -44,7 +44,7 @@ class PostSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at", "moderation_status", "liked")
+        fields = ("id", "title", "description", "author", "photo_url", "created_at", "updated_at", "moderation_status")
 
     @classmethod
     def get_photo_url(cls, record):
