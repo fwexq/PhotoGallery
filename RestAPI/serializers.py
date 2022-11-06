@@ -25,6 +25,7 @@ class UserSerializers(serializers.ModelSerializer):
         except ObjectDoesNotExist:
             return None
 
+
 class UserSerializerIdNameAvatarField(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField(read_only=True)
 
@@ -67,9 +68,9 @@ class TokenSerializers(serializers.ModelSerializer):
         model = Token
         fields = ("user", "key", "created")
 
+
 class LikeSerializers(serializers.ModelSerializer):
-    user = UserSerializers(read_only=True)
-    post = PostSerializers()
+
     class Meta:
         model = Like
         fields = ("id", "user", "post")

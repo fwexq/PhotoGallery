@@ -19,6 +19,7 @@ class DeleteCommentService(Service):
             self._delete_post()
             self.result = self._comment
         return self
+
     @property
     @lru_cache
     def _comment(self):
@@ -35,4 +36,3 @@ class DeleteCommentService(Service):
             self.errors["user"] = ForbiddenError(f"User id {self.cleaned_data['user'].id} has no rights")
         else:
             pass
-

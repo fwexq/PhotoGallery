@@ -5,31 +5,31 @@ from main.models import CustomUser
 from django.db.models.deletion import get_candidate_relations_to_delete
 
 
-class Manager(models.Manager):
-    def get_queryset(self):
-        return super(Manager, self).get_queryset().filter(is_deleted=False)
+# class Manager(models.Manager):
+#     def get_queryset(self):
+#         return super(Manager, self).get_queryset().filter(is_deleted=False)
+#
+#
+# class IsDeletedMixin(models.Model):
+#     is_deleted = models.BooleanField(default=False, verbose_name='На удаление')
+#     objects = Manager()
+#
+#     def delete(self, using=None, keep_parents=False):
+#         self.is_deleted = True
+#         delete_candidates = get_candidate_relations_to_delete(self.__class__._meta)
+#         if delete_candidates:
+#             for rel in delete_candidates:
+#                 if rel.on_delete.__name__ == 'CASCADE' and rel.one_to_many and not rel.hidden:
+#                     for item in getattr(self, rel.related_name).all():
+#                         item.delete()
+#
+#         self.save(update_fields=['is_deleted', ])
+#
+#     class Meta:
+#         abstract = True
 
-
-class IsDeletedMixin(models.Model):
-    is_deleted = models.BooleanField(default=False, verbose_name='На удаление')
-    objects = Manager()
-
-    def delete(self, using=None, keep_parents=False):
-        self.is_deleted = True
-        delete_candidates = get_candidate_relations_to_delete(self.__class__._meta)
-        if delete_candidates:
-            for rel in delete_candidates:
-                if rel.on_delete.__name__ == 'CASCADE' and rel.one_to_many and not rel.hidden:
-                    for item in getattr(self, rel.related_name).all():
-                        item.delete()
-
-        self.save(update_fields=['is_deleted', ])
-
-    class Meta:
-        abstract = True
-
-
-class Post(IsDeletedMixin):
+# class Post(IsDeletedMixin):
+class Post(models.Model):
     MODERATION_CHOICES = [
         ('NOT_MODERATED', 'На модерацию'),
         ('VALID', 'Опубликовано'),

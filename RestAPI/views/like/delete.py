@@ -1,17 +1,16 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-
 from RestAPI.serializers import LikeSerializers
-from RestAPI.services.main.post.likes import LikesService
+from RestAPI.services.like.delete import DeleteLikeService
 
 
-class PostAddLikeView(generics.CreateAPIView):
+class PostDeleteLikeView(generics.DestroyAPIView):
     serializer_class = LikeSerializers
-    def post(self, request, *args, **kwargs):
-        outcome = LikesService.execute(kwargs | {'user': request.user})
+
+    def delete(self, request, *args, **kwargs):
+        outcome = DeleteLikeService.execute(kwargs | {'user': request.user})
         if outcome.errors:
             return Response({key: str(error) for key, error in outcome.errors.items()},
                             status=status.HTTP_404_NOT_FOUND)
         else:
-            return Response(LikeSerializers(outcome.result).data, status=status.HTTP_200_OK)
-
+            return Response(status=status.HTTP_204_NO_CONTENT)

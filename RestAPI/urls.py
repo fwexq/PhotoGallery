@@ -1,9 +1,8 @@
 from django.urls import path
-
-from RestAPI.views.admin.customUserChangeRole import CustomUserChangeRoleView
 from RestAPI.views.comment.listCreate import CommentListCreateView
 from RestAPI.views.comment.detailUpdateDestroy import CommentDetailUpdateDestroyView
-from RestAPI.views.post.likes import PostAddLikeView
+from RestAPI.views.like.create import PostAddLikeView
+from RestAPI.views.like.delete import PostDeleteLikeView
 from RestAPI.views.post.listCreate import PostListCreateView
 from RestAPI.views.post.detailUpdateDestroy import PostDetailUpdateDestroyView
 from RestAPI.views.user.detail import UserDetailView
@@ -20,10 +19,12 @@ urlpatterns = [
     path('comment/', CommentListCreateView.as_view(), name='create_comment'), #Просмотр всех комментариев и создание комментария
     path('comment/<int:post_id>/', CommentDetailUpdateDestroyView.as_view(), name='detailUpdateDestroy_comment'), #Просмотр, обновление, удаление комментария
 
-    path('likes/<int:post_id>/', PostAddLikeView.as_view(), name='likes'), #Устанавливает лайк
+    path('create/like/<int:post_id>/', PostAddLikeView.as_view(), name='likes'), #Устанавливает лайк
+    path('delete/like/<int:post_id>/', PostDeleteLikeView.as_view(), name='likes'), #Снимает лайк
    ]
 
 
-
+# def put(self, request, *args, **kwargs):
+# return Response({"Error": "Method PUT not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
