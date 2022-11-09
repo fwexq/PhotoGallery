@@ -2,7 +2,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 
 from RestAPI.serializers import LikeSerializers
-from RestAPI.services.like.create import LikeService
+from RestAPI.services.main.like.create import LikeService
 
 
 class PostAddLikeView(generics.CreateAPIView):

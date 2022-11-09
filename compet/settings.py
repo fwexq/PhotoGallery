@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'django_celery_beat',
+    'django_celery_beat',
     'service_objects',
+    'django_celery_results',
 ]
 
 REST_FRAMEWORK = {
@@ -221,3 +222,19 @@ SOCIAL_AUTH_PIPELINE = (
 API_SCHEME = os.getenv('API_SCHEME', default='http')
 API_DOMAIN = os.getenv('API_DOMAIN', default='127.0.0.1')
 API_PORT = os.getenv('API_PORT', default='8000')
+
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT
+
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+
+
+CELERY_TASK_SERIALIZERS = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

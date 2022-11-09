@@ -18,6 +18,7 @@ pipfile = "*"
 django-celery-beat = "*"
 redis = "*"
 django-service-objects = "*"
+django-celery-results = "*"
 
 [dev-packages]
 flake8 = "*"

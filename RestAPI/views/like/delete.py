@@ -1,8 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from RestAPI.serializers import LikeSerializers
-from RestAPI.services.like.delete import DeleteLikeService
-
+from RestAPI.services.main.like.delete import DeleteLikeService
 
 class PostDeleteLikeView(generics.DestroyAPIView):
     serializer_class = LikeSerializers
