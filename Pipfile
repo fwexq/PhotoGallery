@@ -19,6 +19,7 @@ django-celery-beat = "*"
 redis = "*"
 django-service-objects = "*"
 django-celery-results = "*"
+flower = "*"
 
 [dev-packages]
 flake8 = "*"

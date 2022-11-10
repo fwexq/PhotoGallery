@@ -42,7 +42,22 @@
                     <a class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> </a>
                     <button type="submit" class="btn btn-sm btn-outline-secondary"></button>
                 </form>
+
             </div>
+
+            <form method="POST" action="{% url 'filtration' %}" >
+                {% csrf_token %}
+                <label>
+                    <select class="select" name="date_filter">
+                        <option value="by likes">by likes</option>
+                        <option value="by comments">by comments</option>
+                        <option value="by date">by date</option>
+                    </select>
+                </label>
+                <button class="apply" type="submit">Apply</button>
+
+</form>
+
 
             {% block javascript %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -91,7 +106,7 @@
             {% endblock javascript %}
 
             {% if request.user.is_authenticated %}
-                <script src="static/main/js/greeting.js"></script>
+{#                <script src="static/main/js/greeting.js"></script>#}
                 <div>
             <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ user.avatar.url }}" alt="" width="32" height="32" class="rounded-circle me-2 ">

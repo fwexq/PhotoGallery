@@ -32,7 +32,7 @@ class PostDeleteService(Service):
             return None
 
     def _delete_post(self):
-        delete_post_over_time.apply_async((self._post.pk, ), countdown=120)
+        delete_post_over_time.apply_async((self._post.pk, ), countdown=40)
         # self._post.delete()
 
 
