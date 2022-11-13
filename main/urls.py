@@ -1,7 +1,7 @@
 from django.urls import path
 from .views.authorization import AuthorizationView
 from .views.comments import CommentsView
-from .views.filtration import PostFiltrationView
+from .views.filtration import PostFiltration
 from .views.role_assignment import RoleAssignmentView
 from .views.for_approval_posts import PostModerationListView
 from .views.likes import LikesView
@@ -43,7 +43,7 @@ urlpatterns = [
 
     path('role_assignment/', RoleAssignmentView.as_view(), name='role_assignment'),
 
-    path('filtration/', PostFiltrationView.as_view(), name='filtration'),
+    path('filtration/', PostFiltration.as_view(), name='filtration'),
 
 ]
 

@@ -8,6 +8,7 @@ from main.models import Post
 class PostFiltrationService(Service):
     ORDER_MAPPER = {"asc": '', "desc": '-'}
     sort_by = forms.CharField(required=True)
+    # sort = forms.CharField()
 
     def process(self):
         if self._sort_field:

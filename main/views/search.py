@@ -2,8 +2,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 
 from ..services.main.menu.search import SearchService
-from ..serializers import PostSerializer
-
+from ..serializers import PostSerializer, LikeSerializers
 
 
 class Search(generics.ListAPIView):
