@@ -34,6 +34,7 @@ class Post(models.Model):
         ('NOT_MODERATED', 'На модерацию'),
         ('VALID', 'Опубликовано'),
         ('INVALID', 'Отклонено'),
+        ('ON_REMOVAL', 'На удалении'),
     ]
     title = models.CharField(max_length=40, verbose_name='Название')
     description = models.CharField(max_length=80, verbose_name='Описание')

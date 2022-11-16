@@ -18,9 +18,10 @@
 
     {% if request.user.id == post_obj.author.id %}
     <div class="card-header">
-        <a href="{% url 'posts_update' post_id=post_obj.id %}">Редактировать</a>
+        <a href="{% url 'posts_update' post_id=post_obj.id %}">Редактировать | </a>
         {#                <button  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger">Удалить</button>#}
-        <a href="{% url 'posts_delete' post_id=post_obj.id %}">Удалить</a>
+        <a href="{% url 'posts_delete' post_id=post_obj.id %}">Удалить |</a>
+        <a href="{% url 'posts_cancel_delete' post_id=post_obj.id %}">Отменить</a>
 
     </div>
     {% endif %}
@@ -82,7 +83,7 @@
                             <strong class="white"><i class="fa-solid fa-comments"></i> {{ post_obj.comments.all.count }} </strong>
                         </form>
 
-
+ {% block javascript %}
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                         <script>
                             $(document).ready(function() {

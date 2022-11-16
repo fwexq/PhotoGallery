@@ -32,7 +32,9 @@ class PostDeleteService(Service):
             return None
 
     def _delete_post(self):
-        delete_post_over_time.apply_async((self._post.pk, ), countdown=40)
+        self._post.moderation_status = 'ON_REMOVAL'
+        self._post.save()
+        delete_post_over_time.apply_async((self._post.pk, ), countdown=120)
         # self._post.delete()
 
 

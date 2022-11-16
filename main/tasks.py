@@ -6,6 +6,7 @@ from main.models import Post
 @shared_task()
 def delete_post_over_time(post_id):
     post = Post.objects.get(pk=post_id)
-    post.delete()
+    if post.moderation_status == 'ON_REMOVAL':
+        post.delete()
     return "good"
 

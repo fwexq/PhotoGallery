@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
+from ..services.main.posts.cancel_delete import PostCancelDeleteService
 from ..services.main.posts.delete import PostDeleteService
 from ..services.main.posts.update import PostUpdateService
 from ..forms import *
@@ -18,7 +19,7 @@ class PostListView(DataMixin, ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        posts = Post.objects.filter(moderation_status='VALID').order_by('-publicated_at')
+        posts = Post.objects.filter(moderation_status__in=['VALID', 'ON_REMOVAL']).order_by('-publicated_at')
         return posts
 
 
@@ -102,3 +103,9 @@ class PostDeleteView(View):
 #     template_name = 'main/posts/confirm_delete.html'
 #
 #     success_url = reverse_lazy('posts_list')
+
+class PostCancelDeleteView(View):
+    model = Post
+    def get(self, request, *args, **kwargs):
+        PostCancelDeleteService.execute(kwargs | {'user': request.user})
+        return redirect('posts_list')

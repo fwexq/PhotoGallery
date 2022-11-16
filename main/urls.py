@@ -6,7 +6,8 @@ from .views.role_assignment import RoleAssignmentView
 from .views.for_approval_posts import PostModerationListView
 from .views.likes import LikesView
 from .views.logouster import ProfileLogoutView
-from .views.posts import PostListView, PostUpdateView, PostDeleteView, DetailPostView, CreatePostView
+from .views.posts import PostListView, PostUpdateView, PostDeleteView, DetailPostView, CreatePostView, \
+    PostCancelDeleteView
 from .views.valid_or_invalid_posts import PostInvalidView, PostValidView
 from .views.profile import ProfileView, ProfileUpdateView
 from .views.search import Search
@@ -24,6 +25,7 @@ urlpatterns = [
     path('create/', CreatePostView.as_view(), name='posts_create'),
     path('update/<int:post_id>/', PostUpdateView.as_view(), name='posts_update'),
     path('delete/<int:post_id>/', PostDeleteView.as_view(), name='posts_delete'),
+    path('cancel/<int:post_id>/', PostCancelDeleteView.as_view(), name='posts_cancel_delete'),
 
     path('detail/<int:post_id>/comments', CommentsView.as_view(), name='comments'),
     path('detail/<int:post_id>', DetailPostView.as_view(), name='posts_detail'),
