@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'service_objects',
     'django_celery_results',
+    'channels',
+    'WebSocket',
+
 ]
 
 REST_FRAMEWORK = {
@@ -239,3 +242,14 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 # CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
+ASGI_APPLICATION = "compet.routing.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

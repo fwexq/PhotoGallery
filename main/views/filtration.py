@@ -11,11 +11,12 @@ from main.services.main.menu.filtration import PostFiltrationService
 class PostFiltration(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
-        # posts = self.request.GET('sort', "")
         outcome = PostFiltrationService.execute(self.request.query_params.dict())
+        return Response({'posts': PostSerializer(outcome, many=True).data})
+        # posts = self.request.GET('sort', "")
         # posts = PostFiltrationService.execute(request.GET)
         # return render(request, 'main/posts/list.html', {"posts": posts})
-        return Response({'posts': PostSerializer(outcome, many=True).data})
+
 
 
 

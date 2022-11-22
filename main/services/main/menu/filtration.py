@@ -8,12 +8,12 @@ from main.models import Post
 class PostFiltrationService(Service):
     ORDER_MAPPER = {"asc": '', "desc": '-'}
     sort_by = forms.CharField(required=True)
-    # sort = forms.CharField()
+
 
     def process(self):
         if self._sort_field:
             if "likes" or "comments":
-                return Post.objects.filter(moderation_status='VALID').annotate(cnt=Count(self._sort_field)).order_by \
+                return Post.objects.filter(moderation_status='VALID').annotate(num_likes=Count("likes", distinct=True), num_comments=Count("comments", distinct=True), cnt=Count(self._sort_field)).order_by \
                     (f'{self._sort_order}cnt')
             elif "date":
                 return Post.objects.filter(moderation_status='VALID').order_by(f'{self._sort_order}publicated_at')

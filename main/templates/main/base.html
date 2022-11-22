@@ -69,19 +69,24 @@
                             success: function(response) {
                                 let block = document.getElementById('list-posts');
                                 block.innerHTML = '';
-                                console.log('сработало')
                                for (let i = 0; i < response.posts.length; i++) {
+                                   let date = new Date(response.posts[i].publicated_at).toLocaleTimeString('en-US', {
+                                                                                                                  weekday: "long",
+                                                                                                                  year: "numeric",
+                                                                                                                  month: "long",
+                                                                                                                  day: "numeric"
+                                                                                                                });
                                     block.innerHTML += '<div class="card">' + '<img src="' + response.posts[i].photo + '">' + '<div class="infos">' + '<div class="title">' + response.posts[i].title  +
                                         '</div>' + '<div class="sub">' + response.posts[i].description + '</div>' + '<br>' + '<i class="fa-solid fa-user-pen"></i>' +
-                                        response.posts[i].author.first_name + '<div class=""><i class="fa-solid fa-calendar"></i>' + response.posts[i].publicated_at + '</div>' + '<br>' +
+                                        response.posts[i].author.first_name + '<div class=""><i class="fa-solid fa-calendar"></i>' + date + '</div>' + '<br>' +
                                         '{% if user.is_authenticated or backends.associated %}' + '<form action="/posts_like/" method="POST" class="ui form">' +
                                         '{% csrf_token %}' + '<input type="hidden" name="post_id" value="' +  response.posts[i].id + '">' + '<button type="submit" class="btn btn-sm btn-outline-secondary">' +
                                         '{% if user not in post.likes.all %}' + '<i class="fa-solid fa-heart white"></i>' + '{% else %}' + '<i class="fa-solid fa-heart"></i>' + '{% endif %}' + '<strong class="white">' +
-                                        response.posts[i].likes + '</strong>' + '</button>' + '<strong class="white"><i class="fa-solid fa-comments"></i>' + response.posts[i].comments + '</strong' +
+                                        response.posts[i].num_likes + '</strong>' + '</button>' + '<strong class="white"><i class="fa-solid fa-comments"></i>' + response.posts[i].num_comments + '</strong' +
                                         '</form>' +
                                         '{% else %}' + '<form action="/posts_like/" method="POST" class="ui form">' + '{% csrf_token %}' + '<input type="hidden" name="post_id" value="' +  response.posts[i].id + '">' +
-                                        '<a data-tooltip="In order to like, you must be logged in">' + '<i class="fa-solid fa-heart inactive" ></i>' + '<strong class="inactive">' + response.posts[i].likes + '</strong>' +
-                                        '</a>' + '<strong class="white"><i class="fa-solid fa-comments"></i>' + response.posts[i].comments + '</strong>' + '</form>' + '{% endif %}' + '</div>' +  '<div class="label a1"><a href="' +
+                                        '<a data-tooltip="In order to like, you must be logged in">' + '<i class="fa-solid fa-heart inactive" ></i>' + '<strong class="inactive">' + response.posts[i].num_likes + '</strong>' +
+                                        '</a>' + '<strong class="white"><i class="fa-solid fa-comments"></i>' + response.posts[i].num_comments + '</strong>' + '</form>' + '{% endif %}' + '</div>' +  '<div class="label a1"><a href="' +
                                         response.posts[i].get_absolute_url + '" class="View">go</a></div>' + '</div>';
   {#format("ddd mmm dd yyyy HH:MM:ss")  console.log(response.posts[0])#}
                                 }
