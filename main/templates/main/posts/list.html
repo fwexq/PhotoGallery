@@ -36,7 +36,7 @@
                 </form>
 
              {% else %}
-                 <form action="{% url 'posts_like' pk=post.id %}" method="POST" class="ui form" name="{{ post.id }}">
+                 <form action="{% url 'posts_like' post_id=post.id %}" method="POST" class="ui form" name="{{ post.id }}">
                     {% csrf_token %}
                     <input type="hidden" name="post_id" value="{{ post.id }}">
                      <a data-tooltip="In order to like, you must be logged in">
